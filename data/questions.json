@@ -1,0 +1,666 @@
+[
+  {
+    "id": "q1-01",
+    "quiz": "Quiz 1",
+    "topic": "DNA Structure",
+    "question": "If guanine makes up 28% of the bases in a sample of DNA, then thymine would make up what percentage of the bases?",
+    "options": ["A) 15%", "B) 22%", "C) 28%", "D) 30%", "E) 40%"],
+    "correct": "B",
+    "explanation": "Guanine pairs with cytosine, so G=C=28%. That's 56% total. The remaining 44% is split between A and T, which pair together, so each is 22%."
+  },
+  {
+    "id": "q1-02",
+    "quiz": "Quiz 1",
+    "topic": "DNA Structure",
+    "question": "Which of the following statements about base pairing is FALSE?",
+    "options": [
+      "A) A purine will base pair with a pyrimidine",
+      "B) Base pairs form between DNA strands/between DNA and RNA/and between RNA strands",
+      "C) Base pairing is required for proper replication of DNA",
+      "D) Base pairing is based on hydrogen bonding",
+      "E) It takes more energy to break AT base pairs than GC base pairs"
+    ],
+    "correct": "E",
+    "explanation": "It takes MORE energy to break GC base pairs (3 hydrogen bonds) than AT base pairs (2 hydrogen bonds)."
+  },
+  {
+    "id": "q1-03",
+    "quiz": "Quiz 1",
+    "topic": "DNA Replication",
+    "question": "In a DNA replication fork, the primer 5'AAUUCCGGUCG3' would be hybridized to which DNA sequence?",
+    "options": [
+      "A) 5' CGACCGGAATT 3'",
+      "B) 5' AATTCCGGTCG 3'",
+      "C) 5' TTAAGGCCAGC 3'",
+      "D) 5' GCTGGCCTTAA 3'"
+    ],
+    "correct": "A",
+    "explanation": "The primer must base pair antiparallel to the template. Reading 3' to 5' of the primer gives the 5' to 3' of the template."
+  },
+  {
+    "id": "q1-04",
+    "quiz": "Quiz 1",
+    "topic": "DNA Structure",
+    "question": "Which chemical group is at the 3' end of a single polynucleotide strand?",
+    "options": [
+      "A) Phosphate group",
+      "B) Hydroxyl group",
+      "C) Purine base",
+      "D) Nitrogen group",
+      "E) Methyl group"
+    ],
+    "correct": "B",
+    "explanation": "The 5' end terminates with a phosphate group attached to the 5th carbon of the sugar, while the 3' end terminates with a free hydroxyl (-OH) group attached to the 3rd carbon of the sugar."
+  },
+  {
+    "id": "q1-05",
+    "quiz": "Quiz 1",
+    "topic": "DNA Structure",
+    "question": "Which of the following statements about DNA structure is FALSE?",
+    "options": [
+      "A) DNA can form both right-handed and left-handed helices",
+      "B) Standard B-form DNA has a major and minor groove with better access to the nitrogen bases in the major groove",
+      "C) The sugar-phosphate backbone is found in the middle of the DNA molecule and the bases face out",
+      "D) The individual monomers of DNA are nucleotides consisting of a sugar/phosphate/and nitrogenous base",
+      "E) Covalent phosphodiester bonds link together nucleotides on the same strand and hydrogen bonds hold the two strands of DNA together"
+    ],
+    "correct": "C",
+    "explanation": "The sugar-phosphate backbones form the sides (outside) of the structure, while the nitrogenous bases are located in the middle between the strands."
+  },
+  {
+    "id": "q1-06",
+    "quiz": "Quiz 1",
+    "topic": "Chromatin Structure",
+    "question": "Which of the following statements about chromatin structure is FALSE?",
+    "options": [
+      "A) Regions of chromosomes that form heterochromatin are generally areas of very active gene expression",
+      "B) A nucleosome is composed of DNA wrapped around a core of histone proteins",
+      "C) Heterochromatin commonly contains methylated DNA",
+      "D) Euchromatin commonly contains acetylated histones"
+    ],
+    "correct": "A",
+    "explanation": "Heterochromatin is very tightly packed, suppressing gene expression. Euchromatin areas are loosely packed, so they have more active gene expression."
+  },
+  {
+    "id": "q1-07",
+    "quiz": "Quiz 1",
+    "topic": "DNA Replication",
+    "question": "DNA replication begins at _______, where ______ is created with two ______, one on each side.",
+    "options": [
+      "A) an origin of replication; a replication bubble; replication forks",
+      "B) a replication bubble; an origin of replication; replication forks",
+      "C) an origin of replication; a replication fork; replication bubbles",
+      "D) a replication fork; a replication bubble; origins of replication"
+    ],
+    "correct": "A",
+    "explanation": "DNA replication initiates at origins of replication, creating a replication bubble with two replication forks moving in opposite directions."
+  },
+  {
+    "id": "q1-08",
+    "quiz": "Quiz 1",
+    "topic": "DNA Replication",
+    "question": "Which of the following tasks is DNA Polymerase capable of?",
+    "options": [
+      "A) Adding a DNA nucleotide to the 5' end of an existing strand with the help of an opposing strand template",
+      "B) Starting a new strand of DNA",
+      "C) Connecting adjacent strands of DNA together",
+      "D) Adding a DNA nucleotide to the 3' end of an existing strand with the help of an opposing strand template",
+      "E) Separating the strands of DNA"
+    ],
+    "correct": "D",
+    "explanation": "DNA Polymerase can only add nucleotides to the 3' end of an existing strand and requires a template."
+  },
+  {
+    "id": "q1-09",
+    "quiz": "Quiz 1",
+    "topic": "DNA Replication",
+    "question": "During DNA Replication, the first nucleotide of a new strand is put in position by...",
+    "options": [
+      "A) DNA Polymerase and it is a DNA nucleotide",
+      "B) Primase and it is an RNA nucleotide",
+      "C) DNA Ligase and it is a DNA nucleotide",
+      "D) Primase and it is a DNA nucleotide",
+      "E) DNA Polymerase and it is an RNA nucleotide"
+    ],
+    "correct": "B",
+    "explanation": "Primase is an RNA polymerase that synthesizes short RNA primers to initiate DNA synthesis."
+  },
+  {
+    "id": "q1-10",
+    "quiz": "Quiz 1",
+    "topic": "DNA Replication",
+    "question": "Which of the following statements about lagging strand synthesis is FALSE?",
+    "options": [
+      "A) Lagging strand synthesis is in the 5'->3' direction",
+      "B) Replication of the lagging strand happens in small fragments",
+      "C) The first fragment built is the one closest to the replication fork and building in fragments continues until the origin of replication is reached",
+      "D) DNA Ligase is used to connect the fragments on the lagging strand"
+    ],
+    "correct": "C",
+    "explanation": "The first Okazaki fragment synthesized is the one farthest from the replication fork (closest to the origin), and new fragments are initiated closer to the moving replication fork."
+  },
+  {
+    "id": "q1-11",
+    "quiz": "Quiz 1",
+    "topic": "DNA Replication",
+    "question": "Proofreading during DNA replication is possible due to...",
+    "options": [
+      "A) The 3'->5' exonuclease capability of DNA Polymerase",
+      "B) The 5'->3' direction rule for strand synthesis",
+      "C) The ability of DNA Ligase to recognize mismatched pairs",
+      "D) A and B",
+      "E) All of the above"
+    ],
+    "correct": "D",
+    "explanation": "The 3'->5' exonuclease capability removes incorrect nucleotides, and the 5'->3' rule means energy for adding nucleotides comes from the incoming nucleotide, allowing repeated removal and reintroduction."
+  },
+  {
+    "id": "q1-12",
+    "quiz": "Quiz 1",
+    "topic": "DNA Replication",
+    "question": "Which of the following statements about telomerase is FALSE?",
+    "options": [
+      "A) It uses an RNA strand as a template",
+      "B) It helps to lengthen the ends of chromosomes",
+      "C) It solves a problem with replicating linear chromosomes where they get shorter",
+      "D) It is used in every human cell",
+      "E) It helps to extend the number of times a cell can divide"
+    ],
+    "correct": "D",
+    "explanation": "Telomerase is only in cells that need to divide often (stem cells, germ line cells). Telomerase activity in other cells can put them at risk for cancer."
+  },
+  {
+    "id": "q1-13",
+    "quiz": "Quiz 1",
+    "topic": "PCR",
+    "question": "If you perform a PCR on a DNA template with the sequence 5'AAGCCTGCGTAAGCT3' with the primer 5'ACGCA3' the first nucleotide added to the primer will be:",
+    "options": ["A) A", "B) T", "C) C", "D) G"],
+    "correct": "D",
+    "explanation": "When the primer binds, the next template nucleotide is a C so a G would be placed across from it on the 3' end of the primer."
+  },
+  {
+    "id": "q1-14",
+    "quiz": "Quiz 1",
+    "topic": "PCR",
+    "question": "Put the following steps of a PCR cycle in the correct order: (i)50-60C to anneal primers (ii)95C to denature DNA (iii)72C to allow polymerase to build new DNA",
+    "options": [
+      "A) i->ii->iii",
+      "B) ii->i->iii",
+      "C) ii->iii->i"
+    ],
+    "correct": "B",
+    "explanation": "First denature at 95C, then anneal primers at 50-60C, then extend at 72C."
+  },
+  {
+    "id": "q1-15",
+    "quiz": "Quiz 1",
+    "topic": "Sanger Sequencing",
+    "question": "In a Sanger sequencing reaction, incorporation of _____ will prevent the addition of further nucleotides by DNA polymerase, because _____.",
+    "options": [
+      "A) deoxyadenosine triphosphate (dATP)/dATP does not have a 5' phosphate",
+      "B) deoxyadenosine triphosphate (dATP)/dATP does not have a 3' hydroxyl group",
+      "C) dideoxyadenosine triphosphate (ddATP)/ddATP does not have a 5' phosphate",
+      "D) dideoxyadenosine triphosphate (ddATP)/ddATP does not have a 3' hydroxyl group",
+      "E) deoxyadenosine triphosphate (dATP)/dATP does not have a sugar group"
+    ],
+    "correct": "D",
+    "explanation": "ddNTPs lack the 3' hydroxyl group, preventing formation of the next phosphodiester bond, causing chain termination."
+  },
+  {
+    "id": "q1-16",
+    "quiz": "Quiz 1",
+    "topic": "PCR",
+    "question": "Why are PCR reactions capable of generating an exponential increase in the amount of DNA?",
+    "options": [
+      "A) The special Taq polymerase is specifically designed to exponentially increase DNA",
+      "B) Because both primers bind to the same template strand",
+      "C) Because PCR uses dideoxynucleotides",
+      "D) Because the strand formed by elongating each primer contains the binding site for the other primer"
+    ],
+    "correct": "D",
+    "explanation": "Since each product strand can be the template for the other primer, the amount of DNA can double every cycle."
+  },
+  {
+    "id": "q2-01",
+    "quiz": "Quiz 2",
+    "topic": "Transcription",
+    "question": "Which of the following statements about a difference between RNA polymerase and DNA polymerase is TRUE?",
+    "options": [
+      "A) RNA polymerase uses RNA as a template and DNA polymerase uses a DNA template",
+      "B) RNA polymerase binds to single-stranded DNA and DNA polymerase binds to double-stranded DNA",
+      "C) RNA polymerase does not need to separate the two strands of DNA in order to synthesize an RNA copy whereas DNA polymerase must unwind the double helix before it can replicate the DNA",
+      "D) RNA polymerase can initiate RNA synthesis but DNA polymerase requires a primer to initiate DNA synthesis"
+    ],
+    "correct": "D",
+    "explanation": "DNA polymerase cannot start from scratch because it always needs a 3' -OH group which can be provided by a primer."
+  },
+  {
+    "id": "q2-02",
+    "quiz": "Quiz 2",
+    "topic": "Transcription",
+    "question": "Transcription of a gene begins with a _________ and ends with a __________.",
+    "options": [
+      "A) promoter/terminating sequence or poly-A signal sequence",
+      "B) promoter/stop codon",
+      "C) start codon/stop codon"
+    ],
+    "correct": "A",
+    "explanation": "Transcription starts at the promoter and ends at terminator sequences."
+  },
+  {
+    "id": "q2-03",
+    "quiz": "Quiz 2",
+    "topic": "Translation",
+    "question": "Translation of a protein begins with a _________ and ends with a __________.",
+    "options": [
+      "A) promoter/terminating sequence or poly-A signal sequence",
+      "B) promoter/stop codon",
+      "C) start codon/stop codon"
+    ],
+    "correct": "C",
+    "explanation": "Translation begins at the AUG start codon and ends at a stop codon."
+  },
+  {
+    "id": "q2-04",
+    "quiz": "Quiz 2",
+    "topic": "Translation",
+    "question": "Translation of a mRNA goes in the ______ direction and the first part of the polypeptide built is the ________.",
+    "options": [
+      "A) 3'->5';C-terminus",
+      "B) 3'->5';N-terminus",
+      "C) 5'->3';C-terminus",
+      "D) 5'->3';N-terminus"
+    ],
+    "correct": "D",
+    "explanation": "Ribosomes read mRNA 5' to 3', and amino acids are added starting from the N-terminus."
+  },
+  {
+    "id": "q2-05",
+    "quiz": "Quiz 2",
+    "topic": "Gene Expression",
+    "question": "Transcription produces this copy of the genetic code that can then be read to make proteins",
+    "options": ["A) DNA", "B) mRNA", "C) tRNA", "D) rRNA", "E) snRNA"],
+    "correct": "B",
+    "explanation": "Messenger RNA (mRNA) carries the genetic information from DNA to be translated into protein."
+  },
+  {
+    "id": "q2-06",
+    "quiz": "Quiz 2",
+    "topic": "Mutations",
+    "question": "Which of the following mutations would be the least likely to affect a protein's function?",
+    "options": [
+      "A) nonsense mutation",
+      "B) missense mutation",
+      "C) deletion",
+      "D) insertion"
+    ],
+    "correct": "B",
+    "explanation": "A missense mutation replaces one amino acid with another, which may or may not alter function depending on the amino acids swapped."
+  },
+  {
+    "id": "q2-07",
+    "quiz": "Quiz 2",
+    "topic": "Mutations",
+    "question": "Which of the following could cause a difference in the size of a gene's mRNA in two different samples?",
+    "options": [
+      "A) A: Alternative splicing",
+      "B) B: A deletion mutation",
+      "C) C: A nonsense mutation",
+      "D) A and B",
+      "E) All of the above"
+    ],
+    "correct": "D",
+    "explanation": "Alternative splicing removes different exons, and deletions remove nucleotides - both change mRNA size. Nonsense mutations don't change mRNA size."
+  },
+  {
+    "id": "q2-08",
+    "quiz": "Quiz 2",
+    "topic": "Mutations",
+    "question": "Which of the following could cause a difference in the size of a gene's protein in two different samples?",
+    "options": [
+      "A) A: Alternative splicing",
+      "B) B: A deletion mutation",
+      "C) C: A nonsense mutation",
+      "D) A and B",
+      "E) All of the above"
+    ],
+    "correct": "E",
+    "explanation": "Alternative splicing, deletions, AND nonsense mutations can all produce shorter proteins."
+  },
+  {
+    "id": "q2-09",
+    "quiz": "Quiz 2",
+    "topic": "Gene Expression",
+    "question": "Which of the following is/are unique to eukaryotes?",
+    "options": [
+      "A) A: Simultaneous transcription and translation of the same mRNA",
+      "B) B: Modifications to the 5' and 3' ends of mRNAs",
+      "C) C: Transcription factors",
+      "D) Both B and C",
+      "E) All of the above"
+    ],
+    "correct": "B",
+    "explanation": "Only eukaryotes add 5' caps and poly-A tails. Prokaryotes have simultaneous transcription/translation."
+  },
+  {
+    "id": "q2-10",
+    "quiz": "Quiz 2",
+    "topic": "Gene Expression",
+    "question": "If you looked at the molecules found in different cells in the same body, you would expect them to have different...",
+    "options": ["A) DNA", "B) tRNAs", "C) mRNAs", "D) rRNAs", "E) All of the above"],
+    "correct": "C",
+    "explanation": "Different cells produce different sets of mRNAs to produce different sets of proteins, even though they have the same DNA."
+  },
+  {
+    "id": "q2-11",
+    "quiz": "Quiz 2",
+    "topic": "Gene Regulation",
+    "question": "Which of the following statements about transcription factors is FALSE?",
+    "options": [
+      "A) The genes for transcription factors are trans regulatory elements",
+      "B) Transcription factors can help RNA Polymerase transcribe a gene",
+      "C) Transcription factors can prevent RNA Polymerase from transcribing a gene",
+      "D) Transcription factors bind to specific sequences on the DNA called cis regulatory sequences",
+      "E) Transcription factors attach to the ribosome"
+    ],
+    "correct": "E",
+    "explanation": "Transcription factors regulate transcription, not translation at the ribosome."
+  },
+  {
+    "id": "q2-12",
+    "quiz": "Quiz 2",
+    "topic": "Gene Regulation",
+    "question": "If a gene is transcribed all of the time this is an example of...",
+    "options": [
+      "A) constitutive expression",
+      "B) inducible expression",
+      "C) repressible expression",
+      "D) none of the above"
+    ],
+    "correct": "A",
+    "explanation": "Constitutive expression means a gene is always \"on\" and constantly transcribed."
+  },
+  {
+    "id": "q2-13",
+    "quiz": "Quiz 2",
+    "topic": "Lac Operon",
+    "question": "If the lac repressor protein was absent or broken, you would expect strong expression from the lac operon...",
+    "options": [
+      "A) all of the time",
+      "B) whenever lactose is present",
+      "C) whenever glucose is absent",
+      "D) only when lactose is present and glucose is absent",
+      "E) never"
+    ],
+    "correct": "C",
+    "explanation": "With the repressor not functioning, the only regulation comes from CAP, which activates expression when glucose is low."
+  },
+  {
+    "id": "q2-14",
+    "quiz": "Quiz 2",
+    "topic": "Lac Operon",
+    "question": "If the CAP protein was absent or broken, you would expect strong expression from the lac operon...",
+    "options": [
+      "A) all of the time",
+      "B) whenever lactose is present",
+      "C) whenever glucose is absent",
+      "D) only when lactose is present and glucose is absent",
+      "E) never"
+    ],
+    "correct": "E",
+    "explanation": "Activation by CAP is needed for strong expression from the operon."
+  },
+  {
+    "id": "q2-15",
+    "quiz": "Quiz 2",
+    "topic": "Gene Structure",
+    "question": "Untranslated regions (UTRs) refer to...",
+    "options": [
+      "A) Parts of an mRNA before the start codon and after the stop codon",
+      "B) Exons",
+      "C) DNA regions between genes",
+      "D) Codons that don't have a corresponding tRNA that can read them"
+    ],
+    "correct": "A",
+    "explanation": "UTRs are the 5' UTR (before the start codon) and 3' UTR (after the stop codon) regions of mRNA that are transcribed but not translated into protein."
+  },
+  {
+    "id": "q2-16",
+    "quiz": "Quiz 2",
+    "topic": "Gene Regulation",
+    "question": "You perform a mutagenesis experiment to create mutant versions of the SNELL gene. You create a strain where the Snell protein has the same structure and function, but there is less protein produced. Which mutations could explain this?",
+    "options": [
+      "A) A: A deletion mutation in the protein coding region of SNELL",
+      "B) B: A substitution mutation in the 5'UTR of SNELL",
+      "C) C: A substitution mutation in a cis regulatory element for the SNELL gene",
+      "D) B and C",
+      "E) All of the above"
+    ],
+    "correct": "D",
+    "explanation": "Cis regulatory sequences regulate transcription and UTRs regulate translation, so both can affect protein abundance without changing the protein itself."
+  },
+  {
+    "id": "q2-17",
+    "quiz": "Quiz 2",
+    "topic": "RNA Interference",
+    "question": "What role do double-stranded RNAs (dsRNAs) play in gene expression?",
+    "options": [
+      "A) dsRNAs activate RNA interference (RNAi) mechanisms that suppress the expression of mRNAs that are complementary to them",
+      "B) dsRNAs are part of the spliceosome",
+      "C) dsRNAs are never found in cells",
+      "D) dsRNAs are translated to make proteins"
+    ],
+    "correct": "A",
+    "explanation": "dsRNA triggers RNAi which destroys complementary mRNAs."
+  },
+  {
+    "id": "pp-01",
+    "quiz": "Practice Problems",
+    "topic": "DNA Structure",
+    "question": "Proteins interact with DNA by binding to nitrogen bases. Do they prefer the major or minor groove?",
+    "options": [
+      "A) Major groove",
+      "B) Minor groove",
+      "C) Both equally",
+      "D) Neither"
+    ],
+    "correct": "A",
+    "explanation": "The major groove provides better access to the nitrogen bases. The minor groove has the sugar-phosphate backbones closer together, making base access harder."
+  },
+  {
+    "id": "pp-02",
+    "quiz": "Practice Problems",
+    "topic": "DNA Replication",
+    "question": "Would DNA replication be easier to begin on DNA with positive or negative supercoils?",
+    "options": [
+      "A) Positive supercoils",
+      "B) Negative supercoils",
+      "C) Makes no difference",
+      "D) DNA doesn't form supercoils"
+    ],
+    "correct": "B",
+    "explanation": "Negative supercoils mean the DNA is underwound (strands wrapped less tightly), making them easier to separate for replication."
+  },
+  {
+    "id": "pp-03",
+    "quiz": "Practice Problems",
+    "topic": "DNA Replication",
+    "question": "What is the role of helicase in DNA replication?",
+    "options": [
+      "A) Adds DNA nucleotides",
+      "B) Unwinds/separates the two DNA strands",
+      "C) Removes RNA primers",
+      "D) Connects Okazaki fragments"
+    ],
+    "correct": "B",
+    "explanation": "Helicase is located at the replication fork and separates the two parent strands so they can be used as templates."
+  },
+  {
+    "id": "pp-04",
+    "quiz": "Practice Problems",
+    "topic": "DNA Replication",
+    "question": "What is the role of topoisomerase in DNA replication?",
+    "options": [
+      "A) Adds DNA nucleotides",
+      "B) Unwinds the DNA helix",
+      "C) Relieves tension/stress ahead of the replication fork",
+      "D) Synthesizes RNA primers"
+    ],
+    "correct": "C",
+    "explanation": "As helicase unwinds DNA, it creates tension ahead. Topoisomerase relieves this tension to prevent DNA from breaking."
+  },
+  {
+    "id": "pp-05",
+    "quiz": "Practice Problems",
+    "topic": "DNA Replication",
+    "question": "What is the source of energy for DNA replication?",
+    "options": [
+      "A) ATP hydrolysis",
+      "B) Removal of two phosphates from incoming nucleotide triphosphates",
+      "C) Heat from the cell",
+      "D) The helicase enzyme"
+    ],
+    "correct": "B",
+    "explanation": "Incoming nucleotides are triphosphates. Removing two phosphate groups releases energy for the phosphodiester bond."
+  },
+  {
+    "id": "pp-06",
+    "quiz": "Practice Problems",
+    "topic": "Sanger Sequencing",
+    "question": "In Sanger sequencing, how do you know which ddNTP ended each fragment?",
+    "options": [
+      "A) Fragment length",
+      "B) Each ddNTP has a different fluorescent color",
+      "C) The sequence is known beforehand",
+      "D) Fragment weight"
+    ],
+    "correct": "B",
+    "explanation": "Each of the four ddNTPs (ddATP, ddTTP, ddGTP, ddCTP) is labeled with a different fluorescent dye color."
+  },
+  {
+    "id": "pp-07",
+    "quiz": "Practice Problems",
+    "topic": "Sanger Sequencing",
+    "question": "What technique separates DNA fragments by size in Sanger sequencing?",
+    "options": [
+      "A) PCR",
+      "B) Gel electrophoresis",
+      "C) Centrifugation",
+      "D) Chromatography"
+    ],
+    "correct": "B",
+    "explanation": "Gel electrophoresis separates DNA fragments by size - smaller fragments travel faster through the gel pores."
+  },
+  {
+    "id": "pp-08",
+    "quiz": "Practice Problems",
+    "topic": "Gene Structure",
+    "question": "What is an open reading frame (ORF)?",
+    "options": [
+      "A) A region of DNA that is always transcribed",
+      "B) A sequence from start codon to stop codon with amino acid codons in between",
+      "C) Any sequence of three nucleotides",
+      "D) The promoter region of a gene"
+    ],
+    "correct": "B",
+    "explanation": "An ORF is a stretch of DNA/RNA from a start codon (AUG) to a stop codon with a long sequence of amino acid-coding codons - potentially a gene."
+  },
+  {
+    "id": "pp-09",
+    "quiz": "Practice Problems",
+    "topic": "Gene Structure",
+    "question": "Why does finding open reading frames work better in prokaryotes than eukaryotes?",
+    "options": [
+      "A) Prokaryotes have more genes",
+      "B) Eukaryotes have introns that break up the reading frame",
+      "C) Prokaryotes have larger genomes",
+      "D) Eukaryotes don't use the same genetic code"
+    ],
+    "correct": "B",
+    "explanation": "Introns in eukaryotic genes interrupt the coding sequence, making ORF detection unreliable without knowing where introns are."
+  },
+  {
+    "id": "pp-10",
+    "quiz": "Practice Problems",
+    "topic": "Gene Regulation",
+    "question": "What are cis regulatory DNA sequences?",
+    "options": [
+      "A) Genes that code for transcription factors",
+      "B) DNA sequences near a gene where transcription factors bind",
+      "C) Sequences that are far from the gene they regulate",
+      "D) RNA sequences"
+    ],
+    "correct": "B",
+    "explanation": "Cis elements must be near the gene they regulate because they're the binding sites for transcription factor proteins."
+  },
+  {
+    "id": "pp-11",
+    "quiz": "Practice Problems",
+    "topic": "Gene Regulation",
+    "question": "What are trans regulatory DNA sequences?",
+    "options": [
+      "A) The genes that code for transcription factors",
+      "B) The binding sites for transcription factors",
+      "C) The promoter region",
+      "D) The terminator region"
+    ],
+    "correct": "A",
+    "explanation": "Trans elements can be anywhere in the genome because they work through their protein products (transcription factors)."
+  },
+  {
+    "id": "pp-12",
+    "quiz": "Practice Problems",
+    "topic": "Lac Operon",
+    "question": "In the lac operon, what does CAP respond to?",
+    "options": [
+      "A) Lactose levels",
+      "B) Glucose levels",
+      "C) Both lactose and glucose",
+      "D) Neither"
+    ],
+    "correct": "B",
+    "explanation": "CAP is the glucose sensor. When glucose is LOW, CAP activates transcription of the lac operon."
+  },
+  {
+    "id": "pp-13",
+    "quiz": "Practice Problems",
+    "topic": "Lac Operon",
+    "question": "In the lac operon, what does the lac repressor respond to?",
+    "options": [
+      "A) Lactose levels",
+      "B) Glucose levels",
+      "C) Both lactose and glucose",
+      "D) Neither"
+    ],
+    "correct": "A",
+    "explanation": "The lac repressor is the lactose sensor. When lactose is HIGH, it binds the repressor and prevents it from blocking transcription."
+  },
+  {
+    "id": "pp-14",
+    "quiz": "Practice Problems",
+    "topic": "Mutations",
+    "question": "What are the three types of substitution mutations?",
+    "options": [
+      "A) Deletion/insertion/frameshift",
+      "B) Silent/missense/nonsense",
+      "C) Point/chromosomal/genomic",
+      "D) Transition/transversion/inversion"
+    ],
+    "correct": "B",
+    "explanation": "Silent = same amino acid, missense = different amino acid, nonsense = creates stop codon."
+  },
+  {
+    "id": "pp-15",
+    "quiz": "Practice Problems",
+    "topic": "RNA Interference",
+    "question": "What triggers RNA interference (RNAi)?",
+    "options": [
+      "A) Single-stranded RNA",
+      "B) Double-stranded RNA",
+      "C) DNA",
+      "D) Proteins"
+    ],
+    "correct": "B",
+    "explanation": "dsRNA (or hairpin RNA) triggers RNAi, leading to destruction of complementary mRNAs. Originally evolved as antiviral defense."
+  }
+]
