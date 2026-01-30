@@ -18,6 +18,11 @@
 
 **Requirements:** QUIZ-01, QUIZ-02, QUIZ-03
 
+**Plans:** 1 plan
+
+Plans:
+- [ ] 01-01-PLAN.md — Create question data file and CLI quiz runner
+
 **Success Criteria:**
 1. All 33 questions (16 + 17) loaded from data file
 2. User can answer multiple choice questions
