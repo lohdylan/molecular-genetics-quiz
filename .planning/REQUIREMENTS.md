@@ -35,9 +35,9 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| QUIZ-01 | Phase 1 | Pending |
-| QUIZ-02 | Phase 1 | Pending |
-| QUIZ-03 | Phase 1 | Pending |
+| QUIZ-01 | Phase 1 | Complete |
+| QUIZ-02 | Phase 1 | Complete |
+| QUIZ-03 | Phase 1 | Complete |
 | TRACK-01 | Phase 2 | Pending |
 | TRACK-02 | Phase 2 | Pending |
 | TRACK-03 | Phase 2 | Pending |
