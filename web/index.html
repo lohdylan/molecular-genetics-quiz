@@ -616,8 +616,53 @@
       lastStudyDate: null,    // ISO date string (YYYY-MM-DD)
       questionsToday: 0,      // questions answered today
       todayDate: null,        // current date for reset detection
-      topicStats: {}          // per-topic tracking: { "Topic Name": { correct: N, total: M } }
+      topicStats: {},         // per-topic tracking: { "Topic Name": { correct: N, total: M } }
+      unlockedAchievements: [], // array of unlocked achievement IDs
+      totalQuestionsAnswered: 0, // lifetime questions answered
+      quizzesCompleted: 0     // number of full quizzes completed
     };
+
+    // Achievement definitions - milestone achievements
+    const achievementDefinitions = [
+      // Correct answer milestones
+      { id: 'first_correct', name: 'First Steps', icon: '&#127793;', description: 'Answer your first question correctly', type: 'milestone', requirement: { metric: 'totalCorrect', value: 1 } },
+      { id: 'ten_correct', name: 'Getting Started', icon: '&#128218;', description: 'Answer 10 questions correctly', type: 'milestone', requirement: { metric: 'totalCorrect', value: 10 } },
+      { id: 'fifty_correct', name: 'Dedicated Learner', icon: '&#127919;', description: 'Answer 50 questions correctly', type: 'milestone', requirement: { metric: 'totalCorrect', value: 50 } },
+      { id: 'hundred_correct', name: 'Century Club', icon: '&#128175;', description: 'Answer 100 questions correctly', type: 'milestone', requirement: { metric: 'totalCorrect', value: 100 } },
+      // Quiz completion milestones
+      { id: 'first_quiz', name: 'Quiz Taker', icon: '&#128221;', description: 'Complete your first quiz', type: 'milestone', requirement: { metric: 'quizzesCompleted', value: 1 } },
+      { id: 'five_quizzes', name: 'Quiz Regular', icon: '&#127939;', description: 'Complete 5 quizzes', type: 'milestone', requirement: { metric: 'quizzesCompleted', value: 5 } },
+      { id: 'ten_quizzes', name: 'Quiz Master', icon: '&#127942;', description: 'Complete 10 quizzes', type: 'milestone', requirement: { metric: 'quizzesCompleted', value: 10 } },
+      // Level milestones
+      { id: 'level_5', name: 'Rising Star', icon: '&#11088;', description: 'Reach Level 5', type: 'milestone', requirement: { metric: 'level', value: 5 } },
+      { id: 'level_10', name: 'Expert', icon: '&#127775;', description: 'Reach Level 10', type: 'milestone', requirement: { metric: 'level', value: 10 } },
+      // Answer streak milestones
+      { id: 'streak_3', name: 'On Fire', icon: '&#128293;', description: 'Get 3 correct answers in a row', type: 'milestone', requirement: { metric: 'currentStreak', value: 3 } },
+      { id: 'streak_5', name: 'Unstoppable', icon: '&#9889;', description: 'Get 5 correct answers in a row', type: 'milestone', requirement: { metric: 'currentStreak', value: 5 } },
+      { id: 'streak_10', name: 'Legendary Streak', icon: '&#127752;', description: 'Get 10 correct answers in a row', type: 'milestone', requirement: { metric: 'currentStreak', value: 10 } },
+      // Daily streak milestones
+      { id: 'daily_3', name: 'Consistent', icon: '&#128197;', description: 'Study for 3 days in a row', type: 'milestone', requirement: { metric: 'dailyStreak', value: 3 } },
+      { id: 'daily_7', name: 'Week Warrior', icon: '&#128198;', description: 'Study for 7 days in a row', type: 'milestone', requirement: { metric: 'dailyStreak', value: 7 } },
+      // Special achievements
+      { id: 'perfect_quiz', name: 'Perfect Score', icon: '&#128142;', description: 'Complete a quiz with 100% accuracy', type: 'milestone', requirement: { metric: 'perfectQuiz', value: true } }
+    ];
+
+    // Generate topic mastery achievements dynamically from questions
+    function generateTopicMasteryAchievements() {
+      const topics = [...new Set(questions.map(q => q.topic))];
+      return topics.map(topic => ({
+        id: `mastery_${topic.toLowerCase().replace(/\s+/g, '_')}`,
+        name: `${topic} Master`,
+        icon: '&#129516;',
+        description: `Answer all ${topic} questions correctly (100%)`,
+        type: 'mastery',
+        topic: topic,
+        requirement: { metric: 'topicMastery', topic: topic, value: 100 }
+      }));
+    }
+
+    // Combine all achievements (populated after questions load)
+    let allAchievements = [...achievementDefinitions];
 
     // Gamification helper functions
     function getCurrentDateString() {
@@ -725,7 +770,10 @@
           lastStudyDate: loaded.lastStudyDate || null,
           questionsToday: loaded.questionsToday || 0,
           todayDate: loaded.todayDate || currentDate,
-          topicStats: loaded.topicStats || {}
+          topicStats: loaded.topicStats || {},
+          unlockedAchievements: loaded.unlockedAchievements || [],
+          totalQuestionsAnswered: loaded.totalQuestionsAnswered || 0,
+          quizzesCompleted: loaded.quizzesCompleted || 0
         };
 
         saveGamificationState(); // Save any updates made during load
@@ -740,7 +788,10 @@
           lastStudyDate: null,
           questionsToday: 0,
           todayDate: getCurrentDateString(),
-          topicStats: {}
+          topicStats: {},
+          unlockedAchievements: [],
+          totalQuestionsAnswered: 0,
+          quizzesCompleted: 0
         };
         return false;
       }
@@ -918,6 +969,9 @@
 
     // Initialize quiz
     function initQuiz() {
+      // Generate topic mastery achievements now that questions are loaded
+      allAchievements = [...achievementDefinitions, ...generateTopicMasteryAchievements()];
+
       // Load gamification state first
       loadGamificationState();
       updateGamificationUI();
