@@ -8,7 +8,7 @@
 | Phase | Name | Goal | Requirements |
 |-------|------|------|--------------|
 | 1 | Core Quiz (CLI) | Working CLI quiz | QUIZ-01 to QUIZ-03 |
-| 2 | CLI Polish | Color, progress, history | ✓ Complete |
+| 2 | CLI Polish | Color, progress, history | Complete |
 | 3 | Web Foundation | Basic web quiz working | WEB-01 to WEB-07, DATA-01 to DATA-03, UI-01 to UI-05 |
 | 4 | Gamification | XP, levels, streaks, achievements, progress | GAME-01 to GAME-05, ACH-01 to ACH-06, PROG-01 to PROG-05 |
 | 5 | Study Modes | Topic filter, weak spots, flashcards | MODE-01 to MODE-04 |
@@ -36,6 +36,12 @@ Added color output (colorama), progress bar, history tracking.
 **Goal:** User can take a quiz in the browser with clean UI and data persistence
 
 **Requirements:** WEB-01 to WEB-07, DATA-01 to DATA-03, UI-01 to UI-05
+
+**Plans:** 2 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Core web quiz (questions, answers, feedback, progress, final score)
+- [ ] 03-02-PLAN.md — Data persistence (localStorage) and responsive polish
 
 **Success Criteria:**
 1. Single HTML file opens in browser and works
