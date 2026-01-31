@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2026-01-30)
 
 **Core value:** Help user actively recall molecular genetics concepts through testing
-**Current focus:** Phase 5 — Study Modes
+**Current focus:** Phase 5 Complete - v2.0 Milestone Ready
 
 ## Current Status
 
@@ -15,16 +15,16 @@ See: .planning/PROJECT.md (updated 2026-01-30)
 | 2 | ● Complete | 100% |
 | 3 | ● Complete | 100% |
 | 4 | ● Complete | 100% |
-| 5 | ◐ In Progress | 50% |
+| 5 | ● Complete | 100% |
 
 ## Milestone Progress
 
 **v2.0 — Gamified Web App**
 
-Progress: █████████░ 90%
+Progress: ██████████ 100%
 
-Phases: 4.5/5 complete
-Requirements: 30/32 complete
+Phases: 5/5 complete
+Requirements: 32/32 complete
 
 ## Completed Plans
 
@@ -37,6 +37,7 @@ Requirements: 30/32 complete
 | 04-02 | 04-gamification | Achievements System | 2026-01-31 |
 | 04-03 | 04-gamification | Progress Tracking & Stats Dashboard | 2026-01-31 |
 | 05-01 | 05-study-modes | Study Mode Selection & Topic Filter | 2026-01-31 |
+| 05-02 | 05-study-modes | Weak Spots Review & Flashcard Mode | 2026-01-31 |
 
 ## Accumulated Decisions
 
@@ -61,11 +62,14 @@ Requirements: 30/32 complete
 | 05-01 | Home screen as default view | Users should choose study mode before starting |
 | 05-01 | Mode state in JS variables | currentMode/currentTopic for simple mode-specific behavior |
 | 05-01 | Topic filter uses questions.filter | No data duplication, efficient filtering |
+| 05-02 | Weak spots = never answered correctly | Questions with 0 correct answers are problem areas |
+| 05-02 | Flashcard shows only answer text | Cleaner display without A/B/C/D prefix |
+| 05-02 | Keyboard support for flashcards | Power users on desktop benefit from keyboard navigation |
 
 ## Session Continuity
 
-**Last session:** 2026-01-31 21:30:00 UTC
-**Stopped at:** Completed 05-01-PLAN.md
+**Last session:** 2026-01-31 21:41:00 UTC
+**Stopped at:** Completed 05-02-PLAN.md (Phase 5 Complete)
 **Resume file:** None
 
 ## Blockers/Concerns
@@ -73,4 +77,4 @@ Requirements: 30/32 complete
 (None)
 
 ---
-Last activity: 2026-01-31 - Completed 05-01 (Study Mode Selection & Topic Filter)
+Last activity: 2026-01-31 - Completed 05-02 (Weak Spots Review & Flashcard Mode) - v2.0 Milestone Complete
