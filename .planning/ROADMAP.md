@@ -45,6 +45,8 @@ Plans:
 
 ## Phase 4: Gamification
 
+**Status:** In progress (1/3 plans complete)
+
 **Goal:** User earns XP, levels up, maintains streaks, and unlocks achievements
 
 **Requirements:** GAME-01 to GAME-05, ACH-01 to ACH-06, PROG-01 to PROG-05
@@ -52,7 +54,7 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — XP, levels, and daily streak system
+- [x] 04-01-PLAN.md — XP, levels, and daily streak system
 - [ ] 04-02-PLAN.md — Achievements with badges, toasts, and gallery
 - [ ] 04-03-PLAN.md — Progress tracking and stats dashboard
 
