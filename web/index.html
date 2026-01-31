@@ -1207,6 +1207,25 @@
       line-height: 1.4;
     }
 
+    .reset-all-btn {
+      margin-top: 30px;
+      padding: 12px 24px;
+      background: transparent;
+      border: 2px solid #ef4444;
+      border-radius: 8px;
+      color: #ef4444;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .reset-all-btn:hover {
+      background: #fef2f2;
+      border-color: #dc2626;
+      color: #dc2626;
+    }
+
     /* Mode cards mobile responsive */
     @media (max-width: 640px) {
       .mode-cards {
@@ -1682,6 +1701,10 @@
           </div>
         </div>
       </div>
+
+      <button class="reset-all-btn" onclick="resetAllProgress()">
+        &#128260; Reset All Progress
+      </button>
     </div>
 
     <!-- Topic Selector Modal -->
@@ -2336,6 +2359,22 @@
 
     // Stats Dashboard Functions
     function showStats() {
+      // Check if quiz is in progress (not on home screen, not on final score)
+      const quizArea = document.getElementById('quiz-area');
+      const finalScore = document.getElementById('final-score');
+      const flashcardScreen = document.getElementById('flashcard-screen');
+
+      if (quizArea.style.display !== 'none' && !finalScore.classList.contains('show')) {
+        quizWasPaused = true;
+        pausedQuizState = 'quiz';
+      } else if (flashcardScreen.classList.contains('show')) {
+        quizWasPaused = true;
+        pausedQuizState = 'flashcard';
+      } else {
+        quizWasPaused = false;
+        pausedQuizState = null;
+      }
+
       hideHomeScreen();
       document.getElementById('quiz-area').style.display = 'none';
       document.getElementById('final-score').classList.remove('show');
@@ -2347,11 +2386,39 @@
 
     function hideStats() {
       document.getElementById('stats-screen').classList.remove('show');
-      showHomeScreen();
+
+      // Resume quiz if it was paused
+      if (quizWasPaused && pausedQuizState === 'quiz') {
+        document.getElementById('quiz-area').style.display = 'block';
+        quizWasPaused = false;
+        pausedQuizState = null;
+      } else if (quizWasPaused && pausedQuizState === 'flashcard') {
+        document.getElementById('flashcard-screen').classList.add('show');
+        quizWasPaused = false;
+        pausedQuizState = null;
+      } else {
+        showHomeScreen();
+      }
     }
 
     // Achievements Gallery Functions
     function showAchievements() {
+      // Check if quiz is in progress (not on home screen, not on final score)
+      const quizArea = document.getElementById('quiz-area');
+      const finalScore = document.getElementById('final-score');
+      const flashcardScreen = document.getElementById('flashcard-screen');
+
+      if (quizArea.style.display !== 'none' && !finalScore.classList.contains('show')) {
+        quizWasPaused = true;
+        pausedQuizState = 'quiz';
+      } else if (flashcardScreen.classList.contains('show')) {
+        quizWasPaused = true;
+        pausedQuizState = 'flashcard';
+      } else {
+        quizWasPaused = false;
+        pausedQuizState = null;
+      }
+
       hideHomeScreen();
       document.getElementById('quiz-area').style.display = 'none';
       document.getElementById('final-score').classList.remove('show');
@@ -2363,7 +2430,19 @@
 
     function hideAchievements() {
       document.getElementById('achievements-screen').classList.remove('show');
-      showHomeScreen();
+
+      // Resume quiz if it was paused
+      if (quizWasPaused && pausedQuizState === 'quiz') {
+        document.getElementById('quiz-area').style.display = 'block';
+        quizWasPaused = false;
+        pausedQuizState = null;
+      } else if (quizWasPaused && pausedQuizState === 'flashcard') {
+        document.getElementById('flashcard-screen').classList.add('show');
+        quizWasPaused = false;
+        pausedQuizState = null;
+      } else {
+        showHomeScreen();
+      }
     }
 
     function renderAchievements() {
@@ -2707,6 +2786,10 @@
     let flashcardQuestions = [];
     let currentFlashcardIndex = 0;
     let isFlipped = false;
+
+    // Track if quiz was paused to view stats/achievements
+    let quizWasPaused = false;
+    let pausedQuizState = null;
 
     function startFlashcards() {
       flashcardQuestions = shuffleArray([...questions]);
@@ -3106,6 +3189,19 @@
     function resetProgressWithConfirmation() {
       if (confirm('Are you sure you want to reset your progress? This will clear your current quiz session.')) {
         resetProgress();
+        location.reload();
+      }
+    }
+
+    // Reset ALL progress (XP, levels, streaks, achievements, question history)
+    function resetAllProgress() {
+      if (confirm('Are you sure you want to reset ALL progress?\n\nThis will clear:\n• XP and Level\n• Daily streak\n• All achievements\n• Topic mastery\n• Question history\n\nThis cannot be undone!')) {
+        // Clear all localStorage data
+        localStorage.removeItem('quizGamificationState');
+        localStorage.removeItem('quizProgress');
+        localStorage.removeItem('quizHistory');
+
+        // Reload the page to reinitialize everything
         location.reload();
       }
     }
