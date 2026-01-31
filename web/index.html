@@ -638,6 +638,275 @@
         transition-duration: 0.01ms !important;
       }
     }
+
+    /* Stats Dashboard Styles */
+    .stats-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .stats-btn:hover {
+      background: #e2e8f0;
+      transform: scale(1.1);
+    }
+
+    .stats-btn:focus {
+      outline: 2px solid #667eea;
+      outline-offset: 2px;
+    }
+
+    .gamification-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .stats-screen {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .stats-screen.show {
+      display: block;
+    }
+
+    .stats-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .stats-title {
+      color: #667eea;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .stats-close-btn {
+      background: #f3f4f6;
+      border: none;
+      color: #6b7280;
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stats-close-btn:hover {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .stats-close-btn:focus {
+      outline: 2px solid #667eea;
+      outline-offset: 2px;
+    }
+
+    .stats-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .stats-card {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stats-card-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #667eea;
+      margin-bottom: 4px;
+    }
+
+    .stats-card-label {
+      font-size: 12px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stats-section {
+      margin-bottom: 24px;
+    }
+
+    .stats-section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .topic-item {
+      background: #f9fafb;
+      border-radius: 8px;
+      padding: 14px 16px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .topic-item.weak {
+      border-color: #fed7aa;
+      background: #fffbeb;
+    }
+
+    .topic-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .topic-name {
+      font-weight: 600;
+      color: #374151;
+      font-size: 14px;
+    }
+
+    .topic-mastery {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .topic-mastery.strong {
+      color: #22c55e;
+    }
+
+    .topic-mastery.medium {
+      color: #667eea;
+    }
+
+    .topic-mastery.weak {
+      color: #f97316;
+    }
+
+    .topic-progress {
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .topic-progress-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .topic-progress-fill.strong {
+      background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+    }
+
+    .topic-progress-fill.medium {
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .topic-progress-fill.weak {
+      background: linear-gradient(90deg, #fb923c 0%, #f97316 100%);
+    }
+
+    .topic-stats-text {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    .history-list {
+      background: #f9fafb;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      overflow: hidden;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+    }
+
+    .history-date {
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .history-score {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .history-score.passing {
+      color: #22c55e;
+    }
+
+    .history-score.failing {
+      color: #ef4444;
+    }
+
+    .no-data-message {
+      text-align: center;
+      color: #9ca3af;
+      padding: 24px;
+      font-size: 14px;
+    }
+
+    /* Stats screen mobile styles */
+    @media (max-width: 640px) {
+      .stats-overview {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .stats-card {
+        padding: 12px;
+      }
+
+      .stats-card-value {
+        font-size: 24px;
+      }
+
+      .stats-title {
+        font-size: 20px;
+      }
+
+      .gamification-actions {
+        gap: 4px;
+      }
+
+      .stats-btn {
+        font-size: 18px;
+        padding: 2px 6px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -657,10 +926,13 @@
           <div class="xp-text" id="xp-text">0 / 100 XP</div>
         </div>
       </div>
-      <div class="streak-display" id="streak-display">
-        <span class="streak-fire">&#128293;</span>
-        <span class="streak-count" id="streak-count">0</span>
-        <span class="streak-label">day streak</span>
+      <div class="gamification-actions">
+        <div class="streak-display" id="streak-display">
+          <span class="streak-fire">&#128293;</span>
+          <span class="streak-count" id="streak-count">0</span>
+          <span class="streak-label">day streak</span>
+        </div>
+        <button class="stats-btn" onclick="showStats()" title="View Progress Stats">&#128202;</button>
       </div>
     </div>
 
@@ -700,6 +972,32 @@
       <div class="score-message" id="score-message"></div>
       <div id="quiz-history"></div>
       <button class="restart-btn" onclick="resetQuiz()">Try Again</button>
+    </div>
+
+    <!-- Stats Dashboard Screen -->
+    <div id="stats-screen" class="stats-screen">
+      <div class="stats-header">
+        <h2 class="stats-title">Your Progress</h2>
+        <button class="stats-close-btn" onclick="hideStats()" title="Close">&#10005;</button>
+      </div>
+
+      <div class="stats-overview" id="stats-overview">
+        <!-- Populated by renderStats() -->
+      </div>
+
+      <div class="stats-section">
+        <div class="stats-section-title">&#128218; Topic Mastery</div>
+        <div class="topic-list" id="topic-list">
+          <!-- Populated by renderStats() -->
+        </div>
+      </div>
+
+      <div class="stats-section">
+        <div class="stats-section-title">&#128197; Quiz History</div>
+        <div class="history-list" id="stats-history-list">
+          <!-- Populated by renderStats() -->
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1183,6 +1481,108 @@
       }
     }
 
+    // Stats Dashboard Functions
+    function showStats() {
+      document.getElementById('quiz-area').style.display = 'none';
+      document.getElementById('final-score').classList.remove('show');
+      document.getElementById('stats-screen').classList.add('show');
+      renderStats();
+    }
+
+    function hideStats() {
+      document.getElementById('stats-screen').classList.remove('show');
+      document.getElementById('quiz-area').style.display = 'block';
+    }
+
+    function renderStats() {
+      renderOverviewCards();
+      renderTopicList();
+      renderStatsHistory();
+    }
+
+    function renderOverviewCards() {
+      const level = calculateLevel(gamificationState.totalXP);
+      const totalCorrect = getTotalCorrect();
+      const totalAnswered = gamificationState.totalQuestionsAnswered;
+      const accuracy = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+
+      const overviewContainer = document.getElementById('stats-overview');
+      overviewContainer.innerHTML = `
+        <div class="stats-card">
+          <div class="stats-card-value">${level}</div>
+          <div class="stats-card-label">Level</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-card-value">${gamificationState.totalXP}</div>
+          <div class="stats-card-label">Total XP</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-card-value">${accuracy}%</div>
+          <div class="stats-card-label">Accuracy</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-card-value">${gamificationState.quizzesCompleted}</div>
+          <div class="stats-card-label">Quizzes</div>
+        </div>
+      `;
+    }
+
+    function renderTopicList() {
+      const topicListContainer = document.getElementById('topic-list');
+      const topicStats = getAllTopicStats();
+
+      if (topicStats.length === 0) {
+        topicListContainer.innerHTML = '<div class="no-data-message">Answer some questions to see topic progress</div>';
+        return;
+      }
+
+      topicListContainer.innerHTML = topicStats.map(stat => renderTopicItem(stat)).join('');
+    }
+
+    function renderTopicItem(stat) {
+      const masteryClass = stat.mastery >= 80 ? 'strong' : (stat.mastery >= 70 ? 'medium' : 'weak');
+      const isWeak = stat.mastery < 70;
+
+      return `
+        <div class="topic-item ${isWeak ? 'weak' : ''}">
+          <div class="topic-header">
+            <span class="topic-name">${stat.topic}</span>
+            <span class="topic-mastery ${masteryClass}">${stat.mastery}%</span>
+          </div>
+          <div class="topic-progress">
+            <div class="topic-progress-fill ${masteryClass}" style="width: ${stat.mastery}%"></div>
+          </div>
+          <div class="topic-stats-text">${stat.correct} of ${stat.total} correct</div>
+        </div>
+      `;
+    }
+
+    function renderStatsHistory() {
+      const historyContainer = document.getElementById('stats-history-list');
+      const history = getQuizHistory();
+
+      if (history.length === 0) {
+        historyContainer.innerHTML = '<div class="no-data-message">Complete a quiz to see history</div>';
+        return;
+      }
+
+      historyContainer.innerHTML = history.slice(0, 10).map(attempt => renderHistoryItem(attempt)).join('');
+    }
+
+    function renderHistoryItem(attempt) {
+      const date = new Date(attempt.date);
+      const dateStr = date.toLocaleDateString();
+      const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const isPassing = attempt.percentage >= 70;
+
+      return `
+        <div class="history-item">
+          <span class="history-date">${dateStr} ${timeStr}</span>
+          <span class="history-score ${isPassing ? 'passing' : 'failing'}">${attempt.score}/${attempt.total} (${attempt.percentage}%)</span>
+        </div>
+      `;
+    }
+
     // Initialize quiz
     function initQuiz() {
       // Generate topic mastery achievements now that questions are loaded
@@ -1206,6 +1606,7 @@
       hasAnswered = false;
       document.getElementById('quiz-area').style.display = 'block';
       document.getElementById('final-score').classList.remove('show');
+      document.getElementById('stats-screen').classList.remove('show');
 
       // Show resuming message if continuing
       if (hasProgress && currentQuestionIndex > 0) {
