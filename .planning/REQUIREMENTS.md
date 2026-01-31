@@ -17,28 +17,28 @@
 
 ### Gamification
 
-- [ ] **GAME-01**: Earn XP points for correct answers (10 XP each)
-- [ ] **GAME-02**: Bonus XP for streaks (consecutive correct)
-- [ ] **GAME-03**: Display current level based on total XP
-- [ ] **GAME-04**: Daily streak counter (days studied in a row)
-- [ ] **GAME-05**: Visual level-up animation/notification
+- [x] **GAME-01**: Earn XP points for correct answers (10 XP each)
+- [x] **GAME-02**: Bonus XP for streaks (consecutive correct)
+- [x] **GAME-03**: Display current level based on total XP
+- [x] **GAME-04**: Daily streak counter (days studied in a row)
+- [x] **GAME-05**: Visual level-up animation/notification
 
 ### Achievements
 
-- [ ] **ACH-01**: Achievement badges for milestones
-- [ ] **ACH-02**: "First Quiz" badge - complete first quiz
-- [ ] **ACH-03**: "Perfect Score" badge - 100% on a quiz
-- [ ] **ACH-04**: "Hot Streak" badge - 10 correct in a row
-- [ ] **ACH-05**: "Topic Master" badge - 100% on a topic
-- [ ] **ACH-06**: Achievement gallery/display screen
+- [x] **ACH-01**: Achievement badges for milestones
+- [x] **ACH-02**: "First Quiz" badge - complete first quiz
+- [x] **ACH-03**: "Perfect Score" badge - 100% on a quiz
+- [x] **ACH-04**: "Hot Streak" badge - 10 correct in a row
+- [x] **ACH-05**: "Topic Master" badge - 100% on a topic
+- [x] **ACH-06**: Achievement gallery/display screen
 
 ### Progress Tracking
 
-- [ ] **PROG-01**: Track correct/incorrect per question
-- [ ] **PROG-02**: Show mastery % per topic (DNA Structure, PCR, etc.)
-- [ ] **PROG-03**: Visual progress bars for each topic
-- [ ] **PROG-04**: Identify weak topics (< 70% correct)
-- [ ] **PROG-05**: History of quiz scores over time
+- [x] **PROG-01**: Track correct/incorrect per question
+- [x] **PROG-02**: Show mastery % per topic (DNA Structure, PCR, etc.)
+- [x] **PROG-03**: Visual progress bars for each topic
+- [x] **PROG-04**: Identify weak topics (< 70% correct)
+- [x] **PROG-05**: History of quiz scores over time
 
 ### Data Persistence
 
@@ -84,9 +84,9 @@
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | WEB-01 to WEB-07 | Phase 3 | Complete |
-| GAME-01 to GAME-05 | Phase 4 | Pending |
-| ACH-01 to ACH-06 | Phase 4 | Pending |
-| PROG-01 to PROG-05 | Phase 4 | Pending |
+| GAME-01 to GAME-05 | Phase 4 | Complete |
+| ACH-01 to ACH-06 | Phase 4 | Complete |
+| PROG-01 to PROG-05 | Phase 4 | Complete |
 | DATA-01 to DATA-03 | Phase 3 | Complete |
 | MODE-01 to MODE-04 | Phase 5 | Pending |
 | UI-01 to UI-05 | Phase 3 | Complete |

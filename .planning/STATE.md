@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2026-01-30)
 
 **Core value:** Help user actively recall molecular genetics concepts through testing
-**Current focus:** Phase 4 — Gamification
+**Current focus:** Phase 5 — Study Modes
 
 ## Current Status
 
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-01-30)
 Progress: █████████░ 80%
 
 Phases: 4/5 complete
-Requirements: 27/32 complete
+Requirements: 28/32 complete
 
 ## Completed Plans
 
