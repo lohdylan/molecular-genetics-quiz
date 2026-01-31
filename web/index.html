@@ -207,6 +207,81 @@
       font-weight: 600;
     }
 
+    .gamification-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .level-display {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .level-badge {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      min-width: 70px;
+      text-align: center;
+    }
+
+    .xp-bar-container {
+      flex: 1;
+      max-width: 150px;
+      margin-left: 8px;
+    }
+
+    .xp-bar {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .xp-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      transition: width 0.5s ease;
+    }
+
+    .xp-text {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 2px;
+      text-align: center;
+    }
+
+    .streak-display {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      color: #f97316;
+    }
+
+    .streak-fire {
+      font-size: 20px;
+    }
+
+    .streak-count {
+      font-size: 16px;
+    }
+
+    .streak-label {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
     .next-btn {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
@@ -408,6 +483,25 @@
         font-size: 11px;
         padding: 5px 10px;
       }
+
+      .gamification-bar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 10px 14px;
+      }
+
+      .level-display {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .xp-bar-container {
+        max-width: 120px;
+      }
+
+      .streak-display {
+        justify-content: center;
+      }
     }
 
     /* Tablet and small desktop */
@@ -448,6 +542,23 @@
 <body>
   <div class="container">
     <h1>Molecular Genetics Quiz</h1>
+
+    <div class="gamification-bar" id="gamification-bar">
+      <div class="level-display">
+        <div class="level-badge" id="level-badge">Level 1</div>
+        <div class="xp-bar-container">
+          <div class="xp-bar">
+            <div class="xp-fill" id="xp-fill" style="width: 0%"></div>
+          </div>
+          <div class="xp-text" id="xp-text">0 / 100 XP</div>
+        </div>
+      </div>
+      <div class="streak-display" id="streak-display">
+        <span class="streak-fire">&#128293;</span>
+        <span class="streak-count" id="streak-count">0</span>
+        <span class="streak-label">day streak</span>
+      </div>
+    </div>
 
     <div id="quiz-area">
       <div class="quiz-header">
@@ -622,6 +733,7 @@
         gamificationState.lastStudyDate = getCurrentDateString();
 
         saveGamificationState();
+        updateGamificationUI();
 
         return xpEarned;
       } else {
@@ -630,7 +742,27 @@
         gamificationState.questionsToday++;
         gamificationState.lastStudyDate = getCurrentDateString();
         saveGamificationState();
+        updateGamificationUI();
         return 0;
+      }
+    }
+
+    // Update gamification UI
+    function updateGamificationUI() {
+      const level = calculateLevel(gamificationState.totalXP);
+      const xpInLevel = gamificationState.totalXP % 100;
+      const xpNeeded = 100;
+      const xpPercent = (xpInLevel / xpNeeded) * 100;
+
+      document.getElementById('level-badge').textContent = `Level ${level}`;
+      document.getElementById('xp-fill').style.width = xpPercent + '%';
+      document.getElementById('xp-text').textContent = `${xpInLevel} / ${xpNeeded} XP`;
+      document.getElementById('streak-count').textContent = gamificationState.dailyStreak;
+
+      // Update streak label for singular/plural
+      const streakLabel = document.querySelector('.streak-label');
+      if (streakLabel) {
+        streakLabel.textContent = gamificationState.dailyStreak === 1 ? 'day streak' : 'day streak';
       }
     }
 
@@ -751,6 +883,7 @@
     function initQuiz() {
       // Load gamification state first
       loadGamificationState();
+      updateGamificationUI();
 
       // Try to load saved progress
       const hasProgress = loadProgress();
