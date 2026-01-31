@@ -15,16 +15,16 @@ See: .planning/PROJECT.md (updated 2026-01-30)
 | 2 | ● Complete | 100% |
 | 3 | ● Complete | 100% |
 | 4 | ● Complete | 100% |
-| 5 | ○ Pending | 0% |
+| 5 | ◐ In Progress | 50% |
 
 ## Milestone Progress
 
 **v2.0 — Gamified Web App**
 
-Progress: █████████░ 80%
+Progress: █████████░ 90%
 
-Phases: 4/5 complete
-Requirements: 28/32 complete
+Phases: 4.5/5 complete
+Requirements: 30/32 complete
 
 ## Completed Plans
 
@@ -36,6 +36,7 @@ Requirements: 28/32 complete
 | 04-01 | 04-gamification | Gamification Core System | 2026-01-31 |
 | 04-02 | 04-gamification | Achievements System | 2026-01-31 |
 | 04-03 | 04-gamification | Progress Tracking & Stats Dashboard | 2026-01-31 |
+| 05-01 | 05-study-modes | Study Mode Selection & Topic Filter | 2026-01-31 |
 
 ## Accumulated Decisions
 
@@ -57,11 +58,14 @@ Requirements: 28/32 complete
 | 04-02 | 15 milestone + dynamic topic mastery achievements | Cover all engagement metrics plus per-topic mastery |
 | 04-02 | Toast auto-dismiss after 4 seconds | Long enough to read, short enough to not block |
 | 04-02 | Locked badges show progress hints | Motivates by showing how close user is to unlock |
+| 05-01 | Home screen as default view | Users should choose study mode before starting |
+| 05-01 | Mode state in JS variables | currentMode/currentTopic for simple mode-specific behavior |
+| 05-01 | Topic filter uses questions.filter | No data duplication, efficient filtering |
 
 ## Session Continuity
 
-**Last session:** 2026-01-31 21:07:20 UTC
-**Stopped at:** Completed 04-03-PLAN.md
+**Last session:** 2026-01-31 21:30:00 UTC
+**Stopped at:** Completed 05-01-PLAN.md
 **Resume file:** None
 
 ## Blockers/Concerns
@@ -69,4 +73,4 @@ Requirements: 28/32 complete
 (None)
 
 ---
-Last activity: 2026-01-31 - Completed 04-03 (Progress Tracking & Stats Dashboard)
+Last activity: 2026-01-31 - Completed 05-01 (Study Mode Selection & Topic Filter)
