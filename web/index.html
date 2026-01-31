@@ -4,6 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Molecular Genetics Quiz</title>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBgGLkhDzWFRG6w3rg7wM-V-PT2B9oVig4",
+      authDomain: "molecular-genetics-quiz.firebaseapp.com",
+      databaseURL: "https://molecular-genetics-quiz-default-rtdb.firebaseio.com",
+      projectId: "molecular-genetics-quiz",
+      storageBucket: "molecular-genetics-quiz.firebasestorage.app",
+      messagingSenderId: "288944178312",
+      appId: "1:288944178312:web:c136a65babf529ec6d4b3d"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+  </script>
+
   <style>
     * {
       margin: 0;
@@ -3629,6 +3650,71 @@
       if (profileIndex >= 0) {
         allProfiles[profileIndex].gamificationState = { ...gamificationState };
         saveAllProfiles();
+
+        // Sync to Firebase for global leaderboard
+        syncProfileToFirebase(allProfiles[profileIndex]);
+      }
+    }
+
+    // ========== FIREBASE SYNC ==========
+
+    function syncProfileToFirebase(profile) {
+      if (!profile || !database) return;
+
+      try {
+        // Create a leaderboard-safe version (only public data)
+        const leaderboardEntry = {
+          name: profile.name,
+          avatar: profile.avatar,
+          totalXP: profile.gamificationState.totalXP || 0,
+          level: Math.floor((profile.gamificationState.totalXP || 0) / 100) + 1,
+          dailyStreak: profile.gamificationState.dailyStreak || 0,
+          quizzesCompleted: profile.gamificationState.quizzesCompleted || 0,
+          lastUpdated: Date.now()
+        };
+
+        // Use a unique ID based on profile ID
+        database.ref('leaderboard/' + profile.id).set(leaderboardEntry);
+      } catch (e) {
+        console.error('Failed to sync to Firebase:', e);
+      }
+    }
+
+    function loadGlobalLeaderboard(callback) {
+      if (!database) {
+        callback([]);
+        return;
+      }
+
+      try {
+        database.ref('leaderboard')
+          .orderByChild('totalXP')
+          .limitToLast(50)
+          .once('value', (snapshot) => {
+            const entries = [];
+            snapshot.forEach((child) => {
+              entries.push({
+                id: child.key,
+                ...child.val()
+              });
+            });
+            // Sort descending by XP
+            entries.sort((a, b) => b.totalXP - a.totalXP);
+            callback(entries);
+          });
+      } catch (e) {
+        console.error('Failed to load leaderboard:', e);
+        callback([]);
+      }
+    }
+
+    function deleteProfileFromFirebase(profileId) {
+      if (!database) return;
+
+      try {
+        database.ref('leaderboard/' + profileId).remove();
+      } catch (e) {
+        console.error('Failed to delete from Firebase:', e);
       }
     }
 
@@ -3799,13 +3885,16 @@
       const profile = allProfiles.find(p => p.id === profileId);
       if (!profile) return;
 
-      if (confirm(`Delete profile "${profile.name}"? This cannot be undone.`)) {
+      if (confirm(`Delete profile "${profile.name}"? This will also remove you from the leaderboard. This cannot be undone.`)) {
         allProfiles = allProfiles.filter(p => p.id !== profileId);
         saveAllProfiles();
 
         // Clear this profile's localStorage data
         localStorage.removeItem('quizProgress_' + profileId);
         localStorage.removeItem('quizHistory_' + profileId);
+
+        // Delete from Firebase leaderboard
+        deleteProfileFromFirebase(profileId);
 
         // If deleted current profile, clear current
         if (currentProfileId === profileId) {
@@ -3833,43 +3922,43 @@
     }
 
     function renderLeaderboard() {
-      // Sort profiles by XP (highest first)
-      const sorted = [...allProfiles].sort((a, b) =>
-        b.gamificationState.totalXP - a.gamificationState.totalXP
-      );
-
       const list = document.getElementById('leaderboard-list');
 
-      if (sorted.length === 0) {
-        list.innerHTML = '<p style="text-align: center; color: #6b7280;">No players yet. Create a profile to start!</p>';
-        return;
-      }
+      // Show loading state
+      list.innerHTML = '<p style="text-align: center; color: #6b7280;">Loading global leaderboard...</p>';
 
-      list.innerHTML = sorted.map((profile, index) => {
-        const level = Math.floor(profile.gamificationState.totalXP / 100) + 1;
-        const isCurrentUser = profile.id === currentProfileId;
-        const rank = index + 1;
+      // Load from Firebase
+      loadGlobalLeaderboard((entries) => {
+        if (entries.length === 0) {
+          list.innerHTML = '<p style="text-align: center; color: #6b7280;">No players yet. Be the first on the leaderboard!</p>';
+          return;
+        }
 
-        let rankDisplay = rank;
-        if (rank === 1) rankDisplay = '🥇';
-        else if (rank === 2) rankDisplay = '🥈';
-        else if (rank === 3) rankDisplay = '🥉';
+        list.innerHTML = entries.map((entry, index) => {
+          const isCurrentUser = entry.id === currentProfileId;
+          const rank = index + 1;
 
-        return `
-          <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
-            <div class="leaderboard-rank">${rankDisplay}</div>
-            <div class="leaderboard-avatar">${profile.avatar}</div>
-            <div class="leaderboard-info">
-              <div class="leaderboard-name">${profile.name}${isCurrentUser ? ' (You)' : ''}</div>
-              <div class="leaderboard-level">Level ${level} • ${profile.gamificationState.dailyStreak} day streak</div>
+          let rankDisplay = rank;
+          if (rank === 1) rankDisplay = '🥇';
+          else if (rank === 2) rankDisplay = '🥈';
+          else if (rank === 3) rankDisplay = '🥉';
+
+          return `
+            <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
+              <div class="leaderboard-rank">${rankDisplay}</div>
+              <div class="leaderboard-avatar">${entry.avatar}</div>
+              <div class="leaderboard-info">
+                <div class="leaderboard-name">${entry.name}${isCurrentUser ? ' (You)' : ''}</div>
+                <div class="leaderboard-level">Level ${entry.level} • ${entry.dailyStreak || 0} day streak</div>
+              </div>
+              <div class="leaderboard-xp">
+                <div class="leaderboard-xp-value">${entry.totalXP}</div>
+                <div class="leaderboard-xp-label">XP</div>
+              </div>
             </div>
-            <div class="leaderboard-xp">
-              <div class="leaderboard-xp-value">${profile.gamificationState.totalXP}</div>
-              <div class="leaderboard-xp-label">XP</div>
-            </div>
-          </div>
-        `;
-      }).join('');
+          `;
+        }).join('');
+      });
     }
 
     // ========== MODIFIED INIT ==========
