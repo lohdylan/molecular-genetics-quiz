@@ -197,6 +197,16 @@
       color: #15803d;
     }
 
+    .xp-earned {
+      margin-left: auto;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
     .next-btn {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
@@ -459,6 +469,7 @@
         <div class="feedback-header">
           <span class="feedback-icon" id="feedback-icon"></span>
           <span id="feedback-title"></span>
+          <span class="xp-earned" id="xp-earned"></span>
         </div>
         <div class="feedback-text" id="feedback-explanation"></div>
         <div class="correct-answer" id="correct-answer"></div>
@@ -584,6 +595,42 @@
           todayDate: getCurrentDateString()
         };
         return false;
+      }
+    }
+
+    // Award XP for answers
+    function awardXP(isCorrect) {
+      if (isCorrect) {
+        // Base XP
+        let xpEarned = 10;
+
+        // Increment answer streak
+        gamificationState.currentStreak++;
+
+        // Streak bonus: +5 per consecutive correct answer
+        // 1st correct: 10 XP (no bonus)
+        // 2nd correct: 10 + 5 = 15 XP
+        // 3rd correct: 10 + 10 = 20 XP
+        if (gamificationState.currentStreak > 1) {
+          xpEarned += (gamificationState.currentStreak - 1) * 5;
+        }
+
+        gamificationState.totalXP += xpEarned;
+        gamificationState.questionsToday++;
+
+        // Update last study date
+        gamificationState.lastStudyDate = getCurrentDateString();
+
+        saveGamificationState();
+
+        return xpEarned;
+      } else {
+        // Reset answer streak on incorrect
+        gamificationState.currentStreak = 0;
+        gamificationState.questionsToday++;
+        gamificationState.lastStudyDate = getCurrentDateString();
+        saveGamificationState();
+        return 0;
       }
     }
 
@@ -772,6 +819,9 @@
         score++;
       }
 
+      // Award XP and get amount earned
+      const xpEarned = awardXP(isCorrect);
+
       // Track this question result
       questionResults[question.id] = {
         answered: true,
@@ -801,6 +851,19 @@
       document.getElementById('feedback-icon').textContent = isCorrect ? '✓' : '✗';
       document.getElementById('feedback-title').textContent = isCorrect ? 'Correct!' : 'Incorrect';
       document.getElementById('feedback-explanation').textContent = question.explanation;
+
+      // Display XP earned
+      const xpDisplay = document.getElementById('xp-earned');
+      if (isCorrect && xpEarned > 0) {
+        let xpText = `+${xpEarned} XP`;
+        if (gamificationState.currentStreak > 1) {
+          xpText += ` | Streak x${gamificationState.currentStreak}!`;
+        }
+        xpDisplay.textContent = xpText;
+        xpDisplay.style.display = 'inline-block';
+      } else {
+        xpDisplay.style.display = 'none';
+      }
 
       if (!isCorrect) {
         const correctOption = question.options.find(opt => opt.charAt(0) === question.correct);
