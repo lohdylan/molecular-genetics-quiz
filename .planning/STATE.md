@@ -5,24 +5,26 @@
 See: .planning/PROJECT.md (updated 2026-01-30)
 
 **Core value:** Help user actively recall molecular genetics concepts through testing
-**Current focus:** Phase 3 — Web Foundation
+**Current focus:** Phase 4 — Gamification
 
 ## Current Status
 
 | Phase | Status | Progress |
 |-------|--------|----------|
 | 1 | ● Complete | 100% |
-| 2 | ○ Pending | 0% |
-| 3 | ● In Progress | 100% |
+| 2 | ● Complete | 100% |
+| 3 | ● Complete | 100% |
+| 4 | ○ Pending | 0% |
+| 5 | ○ Pending | 0% |
 
 ## Milestone Progress
 
-**v1.0 — Exam Ready**
+**v2.0 — Gamified Web App**
 
-Progress: ███████░░░ 67%
+Progress: ██████░░░░ 60%
 
-Phases: 2/3 complete (Phase 1, Phase 3)
-Requirements: 6/9 complete
+Phases: 3/5 complete
+Requirements: 15/32 complete
 
 ## Completed Plans
 

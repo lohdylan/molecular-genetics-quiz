@@ -83,13 +83,13 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| WEB-01 to WEB-07 | Phase 3 | Pending |
+| WEB-01 to WEB-07 | Phase 3 | Complete |
 | GAME-01 to GAME-05 | Phase 4 | Pending |
 | ACH-01 to ACH-06 | Phase 4 | Pending |
 | PROG-01 to PROG-05 | Phase 4 | Pending |
-| DATA-01 to DATA-03 | Phase 3 | Pending |
+| DATA-01 to DATA-03 | Phase 3 | Complete |
 | MODE-01 to MODE-04 | Phase 5 | Pending |
-| UI-01 to UI-05 | Phase 3 | Pending |
+| UI-01 to UI-05 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 32 total
