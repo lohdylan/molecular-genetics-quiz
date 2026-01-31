@@ -14,17 +14,17 @@ See: .planning/PROJECT.md (updated 2026-01-30)
 | 1 | ● Complete | 100% |
 | 2 | ● Complete | 100% |
 | 3 | ● Complete | 100% |
-| 4 | ◐ In progress | 33% |
+| 4 | ◐ In progress | 67% |
 | 5 | ○ Pending | 0% |
 
 ## Milestone Progress
 
 **v2.0 — Gamified Web App**
 
-Progress: ███████░░░ 68%
+Progress: ████████░░ 76%
 
-Phases: 3/5 complete (Phase 4 in progress)
-Requirements: 18/32 complete
+Phases: 3/5 complete (Phase 4 in progress - 2/3 plans done)
+Requirements: 22/32 complete
 
 ## Completed Plans
 
@@ -34,6 +34,7 @@ Requirements: 18/32 complete
 | 03-01 | 03-web-foundation | Web Quiz Interface | 2026-01-31 |
 | 03-02 | 03-web-foundation | Quiz Persistence and Polish | 2026-01-31 |
 | 04-01 | 04-gamification | Gamification Core System | 2026-01-31 |
+| 04-02 | 04-gamification | Achievements System | 2026-01-31 |
 
 ## Accumulated Decisions
 
@@ -52,11 +53,14 @@ Requirements: 18/32 complete
 | 04-01 | +10 XP base, +5 per streak bonus | Reward consecutive correct answers to encourage focus |
 | 04-01 | 100 XP per level (linear) | Simple progression that's easy to understand |
 | 04-01 | 10 questions/day for daily streak | Low enough to be achievable, high enough to encourage study |
+| 04-02 | 15 milestone + dynamic topic mastery achievements | Cover all engagement metrics plus per-topic mastery |
+| 04-02 | Toast auto-dismiss after 4 seconds | Long enough to read, short enough to not block |
+| 04-02 | Locked badges show progress hints | Motivates by showing how close user is to unlock |
 
 ## Session Continuity
 
-**Last session:** 2026-01-31 20:53:39 UTC
-**Stopped at:** Completed 04-01-PLAN.md
+**Last session:** 2026-01-31 21:15:00 UTC
+**Stopped at:** Completed 04-02-PLAN.md
 **Resume file:** None
 
 ## Blockers/Concerns
@@ -64,4 +68,4 @@ Requirements: 18/32 complete
 (None)
 
 ---
-Last activity: 2026-01-31 - Completed 04-01 (Gamification Core System)
+Last activity: 2026-01-31 - Completed 04-02 (Achievements System)
