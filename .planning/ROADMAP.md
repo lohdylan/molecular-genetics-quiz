@@ -68,17 +68,25 @@ Plans:
 
 ---
 
-## Phase 5: Study Modes
+## Phase 5: Study Modes ✓
+
+**Status:** Complete
 
 **Goal:** User can study specific topics, focus on weak areas, and use flashcards
 
 **Requirements:** MODE-01 to MODE-04
 
-**Success Criteria:**
-1. Topic filter lets user quiz on specific subject
-2. "Weak spots" mode prioritizes missed questions
-3. Flashcard mode shows question, reveals answer on click
-4. Mode selection on home screen
+**Plans:** 2 plans
+
+Plans:
+- [x] 05-01-PLAN.md — Mode selection UI and topic-filtered quiz
+- [x] 05-02-PLAN.md — Weak spots review and flashcard mode
+
+**Delivered:**
+1. Home screen with mode selection (Standard, Topic, Weak Spots, Flashcards)
+2. Topic filter with mastery percentages and question counts
+3. Weak spots mode prioritizes never-correct/never-attempted questions (capped at 15)
+4. Flashcard mode with 3D flip animation, keyboard/touch support
 
 ---
 
