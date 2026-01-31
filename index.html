@@ -1226,6 +1226,325 @@
       color: #dc2626;
     }
 
+    /* Profile Selection Screen */
+    .profile-screen {
+      display: none;
+      text-align: center;
+    }
+
+    .profile-screen.show {
+      display: block;
+    }
+
+    .profile-title {
+      font-size: 24px;
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .profile-subtitle {
+      color: #6b7280;
+      margin-bottom: 30px;
+    }
+
+    .profile-section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+      margin: 20px 0 15px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .character-option {
+      width: 60px;
+      height: 60px;
+      border: 3px solid #e5e7eb;
+      border-radius: 50%;
+      background: white;
+      font-size: 32px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .character-option:hover {
+      border-color: #667eea;
+      transform: scale(1.1);
+    }
+
+    .character-option.selected {
+      border-color: #667eea;
+      background: #f0f4ff;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+    }
+
+    .profile-name-input {
+      width: 100%;
+      max-width: 300px;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-name-input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .create-profile-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .create-profile-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .create-profile-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Existing profiles list */
+    .existing-profiles {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .profile-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .profile-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: #f9fafb;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .profile-item:hover {
+      border-color: #667eea;
+      background: #f0f4ff;
+    }
+
+    .profile-item-avatar {
+      font-size: 28px;
+    }
+
+    .profile-item-info {
+      flex: 1;
+      text-align: left;
+    }
+
+    .profile-item-name {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .profile-item-stats {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .profile-item-delete {
+      background: none;
+      border: none;
+      color: #9ca3af;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .profile-item-delete:hover {
+      background: #fef2f2;
+      color: #ef4444;
+    }
+
+    /* Current profile display */
+    .current-profile {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: #f0f4ff;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .current-profile:hover {
+      background: #e0e7ff;
+    }
+
+    .current-profile-avatar {
+      font-size: 20px;
+    }
+
+    .current-profile-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+    }
+
+    /* Leaderboard */
+    .leaderboard-btn {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: transform 0.2s;
+    }
+
+    .leaderboard-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .leaderboard-screen {
+      display: none;
+    }
+
+    .leaderboard-screen.show {
+      display: block;
+    }
+
+    .leaderboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .leaderboard-title {
+      font-size: 24px;
+      color: #667eea;
+    }
+
+    .leaderboard-close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #6b7280;
+    }
+
+    .leaderboard-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .leaderboard-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 16px;
+      background: #f9fafb;
+      border-radius: 12px;
+      border: 2px solid #e5e7eb;
+    }
+
+    .leaderboard-item.current-user {
+      background: #f0f4ff;
+      border-color: #667eea;
+    }
+
+    .leaderboard-rank {
+      font-size: 24px;
+      font-weight: 700;
+      color: #667eea;
+      width: 40px;
+      text-align: center;
+    }
+
+    .leaderboard-item:nth-child(1) .leaderboard-rank { color: #f59e0b; }
+    .leaderboard-item:nth-child(2) .leaderboard-rank { color: #9ca3af; }
+    .leaderboard-item:nth-child(3) .leaderboard-rank { color: #cd7f32; }
+
+    .leaderboard-avatar {
+      font-size: 36px;
+    }
+
+    .leaderboard-info {
+      flex: 1;
+    }
+
+    .leaderboard-name {
+      font-weight: 600;
+      font-size: 16px;
+      color: #374151;
+    }
+
+    .leaderboard-level {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .leaderboard-xp {
+      text-align: right;
+    }
+
+    .leaderboard-xp-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #667eea;
+    }
+
+    .leaderboard-xp-label {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 480px) {
+      .character-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+      }
+
+      .character-option {
+        width: 50px;
+        height: 50px;
+        font-size: 26px;
+      }
+    }
+
     /* Mode cards mobile responsive */
     @media (max-width: 640px) {
       .mode-cards {
@@ -1646,6 +1965,51 @@
   <div class="container">
     <h1>Molecular Genetics Quiz</h1>
 
+    <!-- Profile Selection Screen -->
+    <div id="profile-screen" class="profile-screen">
+      <div class="profile-title">Choose Your Character</div>
+      <div class="profile-subtitle">Pick an avatar and enter your name</div>
+
+      <div class="character-grid" id="character-grid">
+        <div class="character-option" data-char="🦊" onclick="selectCharacter('🦊')">🦊</div>
+        <div class="character-option" data-char="🐱" onclick="selectCharacter('🐱')">🐱</div>
+        <div class="character-option" data-char="🐶" onclick="selectCharacter('🐶')">🐶</div>
+        <div class="character-option" data-char="🐼" onclick="selectCharacter('🐼')">🐼</div>
+        <div class="character-option" data-char="🐨" onclick="selectCharacter('🐨')">🐨</div>
+        <div class="character-option" data-char="🦁" onclick="selectCharacter('🦁')">🦁</div>
+        <div class="character-option" data-char="🐯" onclick="selectCharacter('🐯')">🐯</div>
+        <div class="character-option" data-char="🐸" onclick="selectCharacter('🐸')">🐸</div>
+        <div class="character-option" data-char="🐵" onclick="selectCharacter('🐵')">🐵</div>
+        <div class="character-option" data-char="🦄" onclick="selectCharacter('🦄')">🦄</div>
+        <div class="character-option" data-char="🐲" onclick="selectCharacter('🐲')">🐲</div>
+        <div class="character-option" data-char="🦋" onclick="selectCharacter('🦋')">🦋</div>
+        <div class="character-option" data-char="🦉" onclick="selectCharacter('🦉')">🦉</div>
+        <div class="character-option" data-char="🐙" onclick="selectCharacter('🐙')">🐙</div>
+        <div class="character-option" data-char="🦈" onclick="selectCharacter('🦈')">🦈</div>
+      </div>
+
+      <input type="text" class="profile-name-input" id="profile-name-input" placeholder="Enter your name" maxlength="20">
+
+      <br>
+      <button class="create-profile-btn" id="create-profile-btn" onclick="createProfile()" disabled>
+        Start Playing
+      </button>
+
+      <div class="existing-profiles" id="existing-profiles" style="display: none;">
+        <div class="profile-section-title">Or continue as...</div>
+        <div class="profile-list" id="profile-list"></div>
+      </div>
+    </div>
+
+    <!-- Leaderboard Screen -->
+    <div id="leaderboard-screen" class="leaderboard-screen">
+      <div class="leaderboard-header">
+        <h2 class="leaderboard-title">🏆 Leaderboard</h2>
+        <button class="leaderboard-close-btn" onclick="hideLeaderboard()">✕</button>
+      </div>
+      <div class="leaderboard-list" id="leaderboard-list"></div>
+    </div>
+
     <div class="gamification-bar" id="gamification-bar">
       <div class="level-display">
         <div class="level-badge" id="level-badge">Level 1</div>
@@ -1664,6 +2028,10 @@
         </div>
         <button class="achievements-btn" onclick="showAchievements()" title="View Achievements">&#127942;</button>
         <button class="stats-btn" onclick="showStats()" title="View Progress Stats">&#128202;</button>
+        <div class="current-profile" id="current-profile" onclick="switchProfile()" title="Switch Profile">
+          <span class="current-profile-avatar" id="current-profile-avatar">🦊</span>
+          <span class="current-profile-name" id="current-profile-name">Player</span>
+        </div>
       </div>
     </div>
 
@@ -1701,6 +2069,10 @@
           </div>
         </div>
       </div>
+
+      <button class="leaderboard-btn" onclick="showLeaderboard()">
+        🏆 Leaderboard
+      </button>
 
       <button class="reset-all-btn" onclick="resetAllProgress()">
         &#128260; Reset All Progress
@@ -1854,6 +2226,11 @@
     let currentMode = 'standard'; // 'standard', 'topic', 'weak', 'flashcard'
     let currentTopic = null;
 
+    // Profile system
+    let currentProfileId = null;
+    let selectedCharacter = null;
+    let allProfiles = []; // Array of { id, name, avatar, gamificationState }
+
     // Gamification state
     let gamificationState = {
       totalXP: 0,
@@ -1995,7 +2372,8 @@
     // Gamification localStorage functions
     function saveGamificationState() {
       try {
-        localStorage.setItem('gamificationData', JSON.stringify(gamificationState));
+        // Save to profile system
+        saveCurrentProfileState();
       } catch (e) {
         console.error('Failed to save gamification state:', e);
       }
@@ -2264,7 +2642,8 @@
           questionResults,
           lastAttemptDate: new Date().toISOString()
         };
-        localStorage.setItem('quizProgress', JSON.stringify(progress));
+        const key = currentProfileId ? 'quizProgress_' + currentProfileId : 'quizProgress';
+        localStorage.setItem(key, JSON.stringify(progress));
       } catch (e) {
         console.error('Failed to save progress:', e);
       }
@@ -2272,7 +2651,8 @@
 
     function loadProgress() {
       try {
-        const saved = localStorage.getItem('quizProgress');
+        const key = currentProfileId ? 'quizProgress_' + currentProfileId : 'quizProgress';
+        const saved = localStorage.getItem(key);
         if (!saved) return false;
 
         const progress = JSON.parse(saved);
@@ -2320,7 +2700,8 @@
 
     function resetProgress() {
       try {
-        localStorage.removeItem('quizProgress');
+        const key = currentProfileId ? 'quizProgress_' + currentProfileId : 'quizProgress';
+        localStorage.removeItem(key);
         questionResults = {};
       } catch (e) {
         console.error('Failed to reset progress:', e);
@@ -2329,7 +2710,8 @@
 
     function saveQuizHistory(score, total) {
       try {
-        let history = JSON.parse(localStorage.getItem('quizHistory') || '[]');
+        const key = currentProfileId ? 'quizHistory_' + currentProfileId : 'quizHistory';
+        let history = JSON.parse(localStorage.getItem(key) || '[]');
         const percentage = Math.round((score / total) * 100);
 
         history.unshift({
@@ -2342,7 +2724,7 @@
         // Keep only last 10 attempts
         history = history.slice(0, 10);
 
-        localStorage.setItem('quizHistory', JSON.stringify(history));
+        localStorage.setItem(key, JSON.stringify(history));
       } catch (e) {
         console.error('Failed to save history:', e);
       }
@@ -2350,7 +2732,8 @@
 
     function getQuizHistory() {
       try {
-        return JSON.parse(localStorage.getItem('quizHistory') || '[]');
+        const key = currentProfileId ? 'quizHistory_' + currentProfileId : 'quizHistory';
+        return JSON.parse(localStorage.getItem(key) || '[]');
       } catch (e) {
         console.error('Failed to load history:', e);
         return [];
@@ -3195,16 +3578,323 @@
 
     // Reset ALL progress (XP, levels, streaks, achievements, question history)
     function resetAllProgress() {
-      if (confirm('Are you sure you want to reset ALL progress?\n\nThis will clear:\n• XP and Level\n• Daily streak\n• All achievements\n• Topic mastery\n• Question history\n\nThis cannot be undone!')) {
-        // Clear all localStorage data
-        localStorage.removeItem('quizGamificationState');
-        localStorage.removeItem('quizProgress');
-        localStorage.removeItem('quizHistory');
+      if (confirm('Are you sure you want to reset ALL progress for this profile?\n\nThis will clear:\n• XP and Level\n• Daily streak\n• All achievements\n• Topic mastery\n• Question history\n\nThis cannot be undone!')) {
+        // Reset current profile's gamification state
+        gamificationState = {
+          totalXP: 0,
+          currentStreak: 0,
+          dailyStreak: 0,
+          lastStudyDate: null,
+          questionsToday: 0,
+          todayDate: null,
+          topicStats: {},
+          unlockedAchievements: [],
+          totalQuestionsAnswered: 0,
+          quizzesCompleted: 0,
+          questionHistory: {}
+        };
 
-        // Reload the page to reinitialize everything
+        // Save the reset state to profile
+        saveCurrentProfileState();
+
+        // Clear quiz progress
+        localStorage.removeItem('quizProgress_' + currentProfileId);
+        localStorage.removeItem('quizHistory_' + currentProfileId);
+
+        // Reload to reinitialize
         location.reload();
       }
     }
+
+    // ========== PROFILE SYSTEM ==========
+
+    function loadAllProfiles() {
+      const saved = localStorage.getItem('quizProfiles');
+      if (saved) {
+        allProfiles = JSON.parse(saved);
+      } else {
+        allProfiles = [];
+      }
+      currentProfileId = localStorage.getItem('currentProfileId');
+    }
+
+    function saveAllProfiles() {
+      localStorage.setItem('quizProfiles', JSON.stringify(allProfiles));
+    }
+
+    function saveCurrentProfileState() {
+      if (!currentProfileId) return;
+
+      const profileIndex = allProfiles.findIndex(p => p.id === currentProfileId);
+      if (profileIndex >= 0) {
+        allProfiles[profileIndex].gamificationState = { ...gamificationState };
+        saveAllProfiles();
+      }
+    }
+
+    function selectCharacter(char) {
+      selectedCharacter = char;
+
+      // Update UI
+      document.querySelectorAll('.character-option').forEach(el => {
+        el.classList.remove('selected');
+        if (el.dataset.char === char) {
+          el.classList.add('selected');
+        }
+      });
+
+      updateCreateButtonState();
+    }
+
+    function updateCreateButtonState() {
+      const nameInput = document.getElementById('profile-name-input');
+      const createBtn = document.getElementById('create-profile-btn');
+      const name = nameInput.value.trim();
+
+      createBtn.disabled = !selectedCharacter || !name;
+    }
+
+    function createProfile() {
+      const nameInput = document.getElementById('profile-name-input');
+      const name = nameInput.value.trim();
+
+      if (!name || !selectedCharacter) return;
+
+      // Create new profile
+      const newProfile = {
+        id: 'profile_' + Date.now(),
+        name: name,
+        avatar: selectedCharacter,
+        gamificationState: {
+          totalXP: 0,
+          currentStreak: 0,
+          dailyStreak: 0,
+          lastStudyDate: null,
+          questionsToday: 0,
+          todayDate: null,
+          topicStats: {},
+          unlockedAchievements: [],
+          totalQuestionsAnswered: 0,
+          quizzesCompleted: 0,
+          questionHistory: {}
+        }
+      };
+
+      allProfiles.push(newProfile);
+      saveAllProfiles();
+
+      // Set as current profile
+      selectProfile(newProfile.id);
+    }
+
+    function selectProfile(profileId) {
+      currentProfileId = profileId;
+      localStorage.setItem('currentProfileId', profileId);
+
+      const profile = allProfiles.find(p => p.id === profileId);
+      if (profile) {
+        // Load this profile's gamification state
+        gamificationState = { ...profile.gamificationState };
+
+        // Update current profile display
+        document.getElementById('current-profile-avatar').textContent = profile.avatar;
+        document.getElementById('current-profile-name').textContent = profile.name;
+      }
+
+      // Hide profile screen, show main app
+      document.getElementById('profile-screen').classList.remove('show');
+      document.getElementById('gamification-bar').style.display = 'flex';
+
+      // Initialize quiz
+      initQuizForProfile();
+    }
+
+    function initQuizForProfile() {
+      // Generate topic mastery achievements now that questions are loaded
+      allAchievements = [...achievementDefinitions, ...generateTopicMasteryAchievements()];
+
+      // Update UI with loaded state
+      updateGamificationUI();
+
+      // Try to load saved progress for this profile
+      const hasProgress = loadProgress();
+
+      if (hasProgress && currentQuestionIndex > 0 && currentQuestionIndex < shuffledQuestions.length) {
+        // Resume existing quiz
+        hasAnswered = false;
+        hideHomeScreen();
+        document.getElementById('quiz-area').style.display = 'block';
+        document.getElementById('final-score').classList.remove('show');
+        document.getElementById('stats-screen').classList.remove('show');
+        document.getElementById('achievements-screen').classList.remove('show');
+        showResumingMessage();
+        displayQuestion();
+      } else {
+        // Show home screen for fresh start
+        currentMode = 'standard';
+        currentTopic = null;
+        showHomeScreen();
+      }
+    }
+
+    function switchProfile() {
+      // Save current profile state first
+      saveCurrentProfileState();
+
+      // Show profile selection screen
+      showProfileScreen();
+    }
+
+    function showProfileScreen() {
+      // Hide everything else
+      document.getElementById('gamification-bar').style.display = 'none';
+      document.getElementById('home-screen').classList.remove('show');
+      document.getElementById('quiz-area').style.display = 'none';
+      document.getElementById('final-score').classList.remove('show');
+      document.getElementById('stats-screen').classList.remove('show');
+      document.getElementById('achievements-screen').classList.remove('show');
+      document.getElementById('flashcard-screen').classList.remove('show');
+      document.getElementById('leaderboard-screen').classList.remove('show');
+
+      // Reset selection state
+      selectedCharacter = null;
+      document.querySelectorAll('.character-option').forEach(el => el.classList.remove('selected'));
+      document.getElementById('profile-name-input').value = '';
+      document.getElementById('create-profile-btn').disabled = true;
+
+      // Show existing profiles if any
+      renderExistingProfiles();
+
+      // Show profile screen
+      document.getElementById('profile-screen').classList.add('show');
+    }
+
+    function renderExistingProfiles() {
+      const container = document.getElementById('existing-profiles');
+      const list = document.getElementById('profile-list');
+
+      if (allProfiles.length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+
+      container.style.display = 'block';
+
+      list.innerHTML = allProfiles.map(profile => {
+        const level = Math.floor(profile.gamificationState.totalXP / 100) + 1;
+        return `
+          <div class="profile-item" onclick="selectProfile('${profile.id}')">
+            <span class="profile-item-avatar">${profile.avatar}</span>
+            <div class="profile-item-info">
+              <div class="profile-item-name">${profile.name}</div>
+              <div class="profile-item-stats">Level ${level} • ${profile.gamificationState.totalXP} XP</div>
+            </div>
+            <button class="profile-item-delete" onclick="event.stopPropagation(); deleteProfile('${profile.id}')" title="Delete profile">🗑️</button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function deleteProfile(profileId) {
+      const profile = allProfiles.find(p => p.id === profileId);
+      if (!profile) return;
+
+      if (confirm(`Delete profile "${profile.name}"? This cannot be undone.`)) {
+        allProfiles = allProfiles.filter(p => p.id !== profileId);
+        saveAllProfiles();
+
+        // Clear this profile's localStorage data
+        localStorage.removeItem('quizProgress_' + profileId);
+        localStorage.removeItem('quizHistory_' + profileId);
+
+        // If deleted current profile, clear current
+        if (currentProfileId === profileId) {
+          currentProfileId = null;
+          localStorage.removeItem('currentProfileId');
+        }
+
+        renderExistingProfiles();
+      }
+    }
+
+    // ========== LEADERBOARD ==========
+
+    function showLeaderboard() {
+      renderLeaderboard();
+
+      // Hide home screen, show leaderboard
+      document.getElementById('home-screen').classList.remove('show');
+      document.getElementById('leaderboard-screen').classList.add('show');
+    }
+
+    function hideLeaderboard() {
+      document.getElementById('leaderboard-screen').classList.remove('show');
+      showHomeScreen();
+    }
+
+    function renderLeaderboard() {
+      // Sort profiles by XP (highest first)
+      const sorted = [...allProfiles].sort((a, b) =>
+        b.gamificationState.totalXP - a.gamificationState.totalXP
+      );
+
+      const list = document.getElementById('leaderboard-list');
+
+      if (sorted.length === 0) {
+        list.innerHTML = '<p style="text-align: center; color: #6b7280;">No players yet. Create a profile to start!</p>';
+        return;
+      }
+
+      list.innerHTML = sorted.map((profile, index) => {
+        const level = Math.floor(profile.gamificationState.totalXP / 100) + 1;
+        const isCurrentUser = profile.id === currentProfileId;
+        const rank = index + 1;
+
+        let rankDisplay = rank;
+        if (rank === 1) rankDisplay = '🥇';
+        else if (rank === 2) rankDisplay = '🥈';
+        else if (rank === 3) rankDisplay = '🥉';
+
+        return `
+          <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
+            <div class="leaderboard-rank">${rankDisplay}</div>
+            <div class="leaderboard-avatar">${profile.avatar}</div>
+            <div class="leaderboard-info">
+              <div class="leaderboard-name">${profile.name}${isCurrentUser ? ' (You)' : ''}</div>
+              <div class="leaderboard-level">Level ${level} • ${profile.gamificationState.dailyStreak} day streak</div>
+            </div>
+            <div class="leaderboard-xp">
+              <div class="leaderboard-xp-value">${profile.gamificationState.totalXP}</div>
+              <div class="leaderboard-xp-label">XP</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ========== MODIFIED INIT ==========
+
+    function initQuiz() {
+      // Load all profiles
+      loadAllProfiles();
+
+      // Check if we have a current profile
+      if (currentProfileId && allProfiles.find(p => p.id === currentProfileId)) {
+        // Load existing profile
+        selectProfile(currentProfileId);
+      } else {
+        // Show profile selection screen
+        showProfileScreen();
+      }
+    }
+
+    // Setup profile name input listener
+    document.addEventListener('DOMContentLoaded', function() {
+      const nameInput = document.getElementById('profile-name-input');
+      if (nameInput) {
+        nameInput.addEventListener('input', updateCreateButtonState);
+      }
+    });
 
     // Start quiz when page loads
     window.onload = initQuiz;
