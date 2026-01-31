@@ -1,60 +1,96 @@
 # Roadmap: Molecular Genetics Study Tool
 
-**Created:** 2026-01-30
-**Milestone:** v1.0 — Exam Ready
+**Created:** 2026-01-31
+**Milestone:** v2.0 — Gamified Web App
 
 ## Overview
 
 | Phase | Name | Goal | Requirements |
 |-------|------|------|--------------|
-| 1 | Core Quiz | Working quiz with all questions | QUIZ-01, QUIZ-02, QUIZ-03 |
-| 2 | Smart Review | Track weak spots + flashcards | TRACK-01, TRACK-02, TRACK-03, FLASH-01, FLASH-02 |
+| 1 | Core Quiz (CLI) | Working CLI quiz | QUIZ-01 to QUIZ-03 |
+| 2 | CLI Polish | Color, progress, history | ✓ Complete |
+| 3 | Web Foundation | Basic web quiz working | WEB-01 to WEB-07, DATA-01 to DATA-03, UI-01 to UI-05 |
+| 4 | Gamification | XP, levels, streaks, achievements, progress | GAME-01 to GAME-05, ACH-01 to ACH-06, PROG-01 to PROG-05 |
+| 5 | Study Modes | Topic filter, weak spots, flashcards | MODE-01 to MODE-04 |
 
 ---
 
-## Phase 1: Core Quiz
+## Phase 1: Core Quiz (CLI) ✓
 
-**Goal:** User can take a quiz using the exact questions from Quiz 1 & Quiz 2
+**Status:** Complete
 
-**Requirements:** QUIZ-01, QUIZ-02, QUIZ-03
-
-**Plans:** 1 plan
-
-Plans:
-- [ ] 01-01-PLAN.md — Create question data file and CLI quiz runner
-
-**Success Criteria:**
-1. All 33 questions (16 + 17) loaded from data file
-2. User can answer multiple choice questions
-3. Immediate feedback shows correct answer with explanation
-4. User can complete a full quiz session
+Built CLI quiz tool with 49 questions.
 
 ---
 
-## Phase 2: Smart Review
+## Phase 2: CLI Polish ✓
 
-**Goal:** User can identify and focus on weak spots, review as flashcards
+**Status:** Complete
 
-**Requirements:** TRACK-01, TRACK-02, TRACK-03, FLASH-01, FLASH-02
+Added color output (colorama), progress bar, history tracking.
+
+---
+
+## Phase 3: Web Foundation
+
+**Goal:** User can take a quiz in the browser with clean UI and data persistence
+
+**Requirements:** WEB-01 to WEB-07, DATA-01 to DATA-03, UI-01 to UI-05
 
 **Success Criteria:**
-1. System tracks correct/incorrect answers per question
-2. User can see list of questions they got wrong
-3. Review mode prioritizes weak spots
-4. Flashcard mode shows question → reveal answer
-5. User can mark flashcards as known/need review
+1. Single HTML file opens in browser and works
+2. Questions display with clickable answer options
+3. Feedback shows correct/incorrect with explanation
+4. Progress bar shows completion
+5. Final score screen displays at end
+6. Progress saves to localStorage
+7. Mobile-responsive design
+
+---
+
+## Phase 4: Gamification
+
+**Goal:** User earns XP, levels up, maintains streaks, and unlocks achievements
+
+**Requirements:** GAME-01 to GAME-05, ACH-01 to ACH-06, PROG-01 to PROG-05
+
+**Success Criteria:**
+1. XP awarded for correct answers (+10 base, bonus for streaks)
+2. Level displayed based on total XP
+3. Daily streak counter increments
+4. Achievements unlock and display notifications
+5. Topic mastery percentages shown
+6. Weak topics highlighted (< 70%)
+
+---
+
+## Phase 5: Study Modes
+
+**Goal:** User can study specific topics, focus on weak areas, and use flashcards
+
+**Requirements:** MODE-01 to MODE-04
+
+**Success Criteria:**
+1. Topic filter lets user quiz on specific subject
+2. "Weak spots" mode prioritizes missed questions
+3. Flashcard mode shows question, reveals answer on click
+4. Mode selection on home screen
 
 ---
 
 ## Coverage
 
-All 8 v1 requirements mapped to phases.
+All 32 v1 requirements mapped to phases.
 
-| Category | Requirements | Phase |
-|----------|--------------|-------|
-| Quiz System | 3 | Phase 1 |
-| Tracking | 3 | Phase 2 |
-| Flashcards | 2 | Phase 2 |
+| Category | Count | Phase |
+|----------|-------|-------|
+| Core Quiz Web | 7 | Phase 3 |
+| Gamification | 5 | Phase 4 |
+| Achievements | 6 | Phase 4 |
+| Progress Tracking | 5 | Phase 4 |
+| Data Persistence | 3 | Phase 3 |
+| Study Modes | 4 | Phase 5 |
+| UI/UX | 5 | Phase 3 |
 
 ---
-*Roadmap created: 2026-01-30*
+*Roadmap updated: 2026-01-31*

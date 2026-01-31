@@ -1,53 +1,100 @@
-# Requirements: Molecular Genetics Study Tool
+# Requirements: Molecular Genetics Study Tool (Web App)
 
-**Defined:** 2026-01-30
-**Core Value:** Help user actively recall molecular genetics concepts through testing
+**Defined:** 2026-01-31
+**Core Value:** Engaging gamified testing for active recall
 
 ## v1 Requirements
 
-### Quiz System
+### Core Quiz (Web)
 
-- [ ] **QUIZ-01**: Load questions from Quiz 1 & Quiz 2 data
-- [ ] **QUIZ-02**: Present multiple choice questions one at a time
-- [ ] **QUIZ-03**: Check answer and show correct/incorrect with explanation
+- [ ] **WEB-01**: Single-page web app loads in browser
+- [ ] **WEB-02**: Questions load from JSON data file
+- [ ] **WEB-03**: Display question with multiple choice options
+- [ ] **WEB-04**: User clicks option to answer
+- [ ] **WEB-05**: Show correct/incorrect feedback with explanation
+- [ ] **WEB-06**: Progress bar shows quiz completion
+- [ ] **WEB-07**: Final score screen at end of quiz
 
-### Tracking
+### Gamification
 
-- [ ] **TRACK-01**: Track which questions were answered correctly/incorrectly
-- [ ] **TRACK-02**: Show weak spots (questions answered wrong)
-- [ ] **TRACK-03**: Prioritize weak spots in review sessions
+- [ ] **GAME-01**: Earn XP points for correct answers (10 XP each)
+- [ ] **GAME-02**: Bonus XP for streaks (consecutive correct)
+- [ ] **GAME-03**: Display current level based on total XP
+- [ ] **GAME-04**: Daily streak counter (days studied in a row)
+- [ ] **GAME-05**: Visual level-up animation/notification
 
-### Flashcards
+### Achievements
 
-- [ ] **FLASH-01**: Show concept as flashcard (question on front, answer on back)
-- [ ] **FLASH-02**: Mark cards as "know it" or "need review"
+- [ ] **ACH-01**: Achievement badges for milestones
+- [ ] **ACH-02**: "First Quiz" badge - complete first quiz
+- [ ] **ACH-03**: "Perfect Score" badge - 100% on a quiz
+- [ ] **ACH-04**: "Hot Streak" badge - 10 correct in a row
+- [ ] **ACH-05**: "Topic Master" badge - 100% on a topic
+- [ ] **ACH-06**: Achievement gallery/display screen
+
+### Progress Tracking
+
+- [ ] **PROG-01**: Track correct/incorrect per question
+- [ ] **PROG-02**: Show mastery % per topic (DNA Structure, PCR, etc.)
+- [ ] **PROG-03**: Visual progress bars for each topic
+- [ ] **PROG-04**: Identify weak topics (< 70% correct)
+- [ ] **PROG-05**: History of quiz scores over time
+
+### Data Persistence
+
+- [ ] **DATA-01**: Save all progress to localStorage
+- [ ] **DATA-02**: Load saved progress on page load
+- [ ] **DATA-03**: Reset progress option
+
+### Study Modes
+
+- [ ] **MODE-01**: Full quiz mode (all questions, randomized)
+- [ ] **MODE-02**: Topic-specific quiz (filter by topic)
+- [ ] **MODE-03**: Weak spots review (prioritize missed questions)
+- [ ] **MODE-04**: Flashcard mode (reveal answer on click)
+
+### UI/UX
+
+- [ ] **UI-01**: Clean, modern design with good typography
+- [ ] **UI-02**: Mobile-responsive layout
+- [ ] **UI-03**: Smooth animations for feedback/transitions
+- [ ] **UI-04**: Color scheme (green=correct, red=incorrect)
+- [ ] **UI-05**: Dashboard/home screen with stats
+
+## v2 Requirements (Future)
+
+- Timed quiz mode
+- Compete with friends (shareable scores)
+- Sound effects
+- Dark mode toggle
+- More question banks
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| User authentication | Single user, local tool |
-| Complex spaced repetition | Simple tracking sufficient for 2-day timeline |
-| Content creation UI | Questions loaded from data files |
-| Mobile app | CLI/web sufficient |
+| User accounts | localStorage sufficient, no server |
+| Backend/database | Fully client-side app |
+| Native mobile app | Responsive web works on mobile |
+| Content editor | Questions in JSON file |
+| Complex algorithms | Simple tracking works |
 
 ## Traceability
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| QUIZ-01 | Phase 1 | Complete |
-| QUIZ-02 | Phase 1 | Complete |
-| QUIZ-03 | Phase 1 | Complete |
-| TRACK-01 | Phase 2 | Pending |
-| TRACK-02 | Phase 2 | Pending |
-| TRACK-03 | Phase 2 | Pending |
-| FLASH-01 | Phase 2 | Pending |
-| FLASH-02 | Phase 2 | Pending |
+| WEB-01 to WEB-07 | Phase 3 | Pending |
+| GAME-01 to GAME-05 | Phase 4 | Pending |
+| ACH-01 to ACH-06 | Phase 4 | Pending |
+| PROG-01 to PROG-05 | Phase 4 | Pending |
+| DATA-01 to DATA-03 | Phase 3 | Pending |
+| MODE-01 to MODE-04 | Phase 5 | Pending |
+| UI-01 to UI-05 | Phase 3 | Pending |
 
 **Coverage:**
-- v1 requirements: 8 total
-- Mapped to phases: 8
+- v1 requirements: 32 total
+- Mapped to phases: 32
 - Unmapped: 0
 
 ---
-*Requirements defined: 2026-01-30*
+*Requirements defined: 2026-01-31*
