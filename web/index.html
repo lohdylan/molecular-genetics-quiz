@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Molecular Genetics Quiz</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+    }
+
+    h1 {
+      color: #667eea;
+      font-size: 32px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .quiz-header {
+      margin-bottom: 25px;
+    }
+
+    .topic {
+      display: inline-block;
+      background: #f3f4f6;
+      color: #6b7280;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .question-counter {
+      color: #9ca3af;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      transition: width 0.3s ease;
+    }
+
+    .question-text {
+      font-size: 20px;
+      color: #1f2937;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      font-weight: 500;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .option-btn {
+      background: white;
+      border: 2px solid #e5e7eb;
+      padding: 16px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #374151;
+    }
+
+    .option-btn:hover {
+      border-color: #667eea;
+      background: #f9fafb;
+      transform: translateX(4px);
+    }
+
+    .option-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .option-btn.selected {
+      border-color: #667eea;
+      background: #eef2ff;
+    }
+
+    .option-btn.correct {
+      border-color: #22c55e;
+      background: #f0fdf4;
+      color: #15803d;
+    }
+
+    .option-btn.incorrect {
+      border-color: #ef4444;
+      background: #fef2f2;
+      color: #991b1b;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 8px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.correct {
+      background: #f0fdf4;
+      border: 2px solid #22c55e;
+    }
+
+    .feedback.incorrect {
+      background: #fef2f2;
+      border: 2px solid #ef4444;
+    }
+
+    .feedback-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .feedback-header.correct {
+      color: #15803d;
+    }
+
+    .feedback-header.incorrect {
+      color: #991b1b;
+    }
+
+    .feedback-icon {
+      font-size: 24px;
+    }
+
+    .feedback-text {
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    .correct-answer {
+      margin-top: 10px;
+      font-weight: 600;
+      color: #15803d;
+    }
+
+    .next-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: none;
+      margin-top: 20px;
+    }
+
+    .next-btn.show {
+      display: inline-block;
+    }
+
+    .next-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .final-score {
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .final-score.show {
+      display: block;
+    }
+
+    .score-number {
+      font-size: 72px;
+      font-weight: 700;
+      color: #667eea;
+      margin: 30px 0;
+    }
+
+    .score-percentage {
+      font-size: 32px;
+      color: #6b7280;
+      margin-bottom: 20px;
+    }
+
+    .score-message {
+      font-size: 20px;
+      color: #374151;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .restart-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .restart-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .question-text {
+        font-size: 18px;
+      }
+
+      .option-btn {
+        padding: 14px 16px;
+        font-size: 15px;
+      }
+
+      .score-number {
+        font-size: 56px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Molecular Genetics Quiz</h1>
+
+    <div id="quiz-area">
+      <div class="quiz-header">
+        <div class="topic" id="topic"></div>
+        <div class="question-counter" id="counter"></div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress"></div>
+        </div>
+      </div>
+
+      <div class="question-text" id="question"></div>
+
+      <div class="options" id="options"></div>
+
+      <div id="feedback" class="feedback">
+        <div class="feedback-header">
+          <span class="feedback-icon" id="feedback-icon"></span>
+          <span id="feedback-title"></span>
+        </div>
+        <div class="feedback-text" id="feedback-explanation"></div>
+        <div class="correct-answer" id="correct-answer"></div>
+      </div>
+
+      <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question</button>
+    </div>
+
+    <div id="final-score" class="final-score">
+      <h2 style="color: #667eea; font-size: 36px;">Quiz Complete!</h2>
+      <div class="score-number" id="score-number"></div>
+      <div class="score-percentage" id="score-percentage"></div>
+      <div class="score-message" id="score-message"></div>
+      <button class="restart-btn" onclick="resetQuiz()">Try Again</button>
+    </div>
+  </div>
+
+  <script src="questions.js"></script>
+  <script>
+    // Quiz state
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let shuffledQuestions = [];
+    let hasAnswered = false;
+
+    // Fisher-Yates shuffle algorithm
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    // Initialize quiz
+    function initQuiz() {
+      shuffledQuestions = shuffleArray(questions);
+      currentQuestionIndex = 0;
+      score = 0;
+      hasAnswered = false;
+      document.getElementById('quiz-area').style.display = 'block';
+      document.getElementById('final-score').classList.remove('show');
+      displayQuestion();
+    }
+
+    // Display current question
+    function displayQuestion() {
+      hasAnswered = false;
+      const question = shuffledQuestions[currentQuestionIndex];
+      const totalQuestions = shuffledQuestions.length;
+      const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+
+      // Update header
+      document.getElementById('topic').textContent = question.topic;
+      document.getElementById('counter').textContent = `Question ${currentQuestionIndex + 1} of ${totalQuestions}`;
+      document.getElementById('progress').style.width = progress + '%';
+
+      // Update question text
+      document.getElementById('question').textContent = question.question;
+
+      // Create option buttons
+      const optionsContainer = document.getElementById('options');
+      optionsContainer.innerHTML = '';
+
+      question.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'option-btn';
+        button.textContent = option;
+        button.onclick = () => selectAnswer(option.charAt(0));
+        optionsContainer.appendChild(button);
+      });
+
+      // Hide feedback and next button
+      document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
+      document.getElementById('next-btn').classList.remove('show');
+    }
+
+    // Handle answer selection
+    function selectAnswer(selectedLetter) {
+      if (hasAnswered) return;
+      hasAnswered = true;
+
+      const question = shuffledQuestions[currentQuestionIndex];
+      const isCorrect = selectedLetter === question.correct;
+
+      if (isCorrect) {
+        score++;
+      }
+
+      // Update button states
+      const buttons = document.querySelectorAll('.option-btn');
+      buttons.forEach(button => {
+        const buttonLetter = button.textContent.charAt(0);
+        button.disabled = true;
+
+        if (buttonLetter === question.correct) {
+          button.classList.add('correct');
+        } else if (buttonLetter === selectedLetter && !isCorrect) {
+          button.classList.add('incorrect');
+        }
+      });
+
+      // Show feedback
+      const feedback = document.getElementById('feedback');
+      const feedbackHeader = feedback.querySelector('.feedback-header');
+
+      feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+      feedbackHeader.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+      document.getElementById('feedback-icon').textContent = isCorrect ? '✓' : '✗';
+      document.getElementById('feedback-title').textContent = isCorrect ? 'Correct!' : 'Incorrect';
+      document.getElementById('feedback-explanation').textContent = question.explanation;
+
+      if (!isCorrect) {
+        const correctOption = question.options.find(opt => opt.charAt(0) === question.correct);
+        document.getElementById('correct-answer').textContent = `Correct answer: ${correctOption}`;
+      } else {
+        document.getElementById('correct-answer').textContent = '';
+      }
+
+      // Show next button
+      document.getElementById('next-btn').classList.add('show');
+    }
+
+    // Move to next question or show final score
+    function nextQuestion() {
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex < shuffledQuestions.length) {
+        displayQuestion();
+      } else {
+        showFinalScore();
+      }
+    }
+
+    // Display final score
+    function showFinalScore() {
+      document.getElementById('quiz-area').style.display = 'none';
+      document.getElementById('final-score').classList.add('show');
+
+      const totalQuestions = shuffledQuestions.length;
+      const percentage = Math.round((score / totalQuestions) * 100);
+
+      document.getElementById('score-number').textContent = `${score}/${totalQuestions}`;
+      document.getElementById('score-percentage').textContent = `${percentage}%`;
+
+      let message = '';
+      if (percentage >= 90) {
+        message = 'Outstanding! You have excellent mastery of molecular genetics concepts.';
+      } else if (percentage >= 80) {
+        message = 'Great job! You have a strong understanding of the material.';
+      } else if (percentage >= 70) {
+        message = 'Good work! You understand most concepts but could benefit from more review.';
+      } else if (percentage >= 60) {
+        message = 'Passing grade, but there\'s room for improvement. Review the explanations and try again.';
+      } else {
+        message = 'Keep studying! Review the material and take the quiz again to improve your score.';
+      }
+
+      document.getElementById('score-message').textContent = message;
+    }
+
+    // Reset and restart quiz
+    function resetQuiz() {
+      initQuiz();
+    }
+
+    // Start quiz when page loads
+    window.onload = initQuiz;
+  </script>
+</body>
+</html>
