@@ -1580,12 +1580,12 @@
     </div>
 
     <div id="final-score" class="final-score">
-      <h2 style="color: #667eea; font-size: 36px;">Quiz Complete!</h2>
+      <h2 id="final-score-header" style="color: #667eea; font-size: 36px;">Quiz Complete!</h2>
       <div class="score-number" id="score-number"></div>
       <div class="score-percentage" id="score-percentage"></div>
       <div class="score-message" id="score-message"></div>
       <div id="quiz-history"></div>
-      <button class="restart-btn" onclick="resetQuiz()">Try Again</button>
+      <button class="restart-btn" id="restart-btn" onclick="resetQuiz()">Try Again</button>
     </div>
 
     <!-- Stats Dashboard Screen -->
@@ -1665,7 +1665,8 @@
       topicStats: {},         // per-topic tracking: { "Topic Name": { correct: N, total: M } }
       unlockedAchievements: [], // array of unlocked achievement IDs
       totalQuestionsAnswered: 0, // lifetime questions answered
-      quizzesCompleted: 0     // number of full quizzes completed
+      quizzesCompleted: 0,    // number of full quizzes completed
+      questionHistory: {}     // per-question tracking: { questionId: { attempts: N, correct: N } }
     };
 
     // Achievement definitions - milestone achievements
@@ -1761,6 +1762,36 @@
       return result;
     }
 
+    // Weak spots question tracking functions
+    function updateQuestionHistory(questionId, isCorrect) {
+      if (!gamificationState.questionHistory[questionId]) {
+        gamificationState.questionHistory[questionId] = { attempts: 0, correct: 0 };
+      }
+      gamificationState.questionHistory[questionId].attempts++;
+      if (isCorrect) {
+        gamificationState.questionHistory[questionId].correct++;
+      }
+    }
+
+    // Get questions that are "weak" (never answered correctly OR never attempted)
+    function getWeakQuestions() {
+      const history = gamificationState.questionHistory || {};
+
+      return questions.filter(q => {
+        const qHistory = history[q.id];
+        // Never attempted
+        if (!qHistory) return true;
+        // Attempted but never correct
+        if (qHistory.correct === 0) return true;
+        return false;
+      });
+    }
+
+    // Count weak questions for display
+    function getWeakQuestionCount() {
+      return getWeakQuestions().length;
+    }
+
     // Gamification localStorage functions
     function saveGamificationState() {
       try {
@@ -1819,7 +1850,8 @@
           topicStats: loaded.topicStats || {},
           unlockedAchievements: loaded.unlockedAchievements || [],
           totalQuestionsAnswered: loaded.totalQuestionsAnswered || 0,
-          quizzesCompleted: loaded.quizzesCompleted || 0
+          quizzesCompleted: loaded.quizzesCompleted || 0,
+          questionHistory: loaded.questionHistory || {}
         };
 
         saveGamificationState(); // Save any updates made during load
@@ -2351,14 +2383,14 @@
     }
 
     function updateWeakSpotsCount() {
-      const weakTopics = getAllTopicStats().filter(t => t.mastery < 70);
+      const weakCount = getWeakQuestionCount();
       const weakSpotsDesc = document.getElementById('weak-spots-count');
-      if (weakTopics.length > 0) {
-        weakSpotsDesc.textContent = `${weakTopics.length} topics need work`;
-      } else if (Object.keys(gamificationState.topicStats).length === 0) {
+      if (weakCount > 0) {
+        weakSpotsDesc.textContent = `${weakCount} question${weakCount === 1 ? '' : 's'} to review`;
+      } else if (Object.keys(gamificationState.questionHistory).length === 0) {
         weakSpotsDesc.textContent = 'Review missed questions';
       } else {
-        weakSpotsDesc.textContent = 'No weak spots found!';
+        weakSpotsDesc.textContent = 'All caught up!';
       }
     }
 
@@ -2446,35 +2478,49 @@
       saveProgress();
     }
 
-    // Weak Spots Quiz Mode (placeholder for future implementation)
+    // Weak Spots Quiz Mode - prioritizes questions never answered correctly
     function startWeakSpotsQuiz() {
-      const weakTopics = getAllTopicStats().filter(t => t.mastery < 70);
+      const weakQuestions = getWeakQuestions();
 
-      if (weakTopics.length === 0 && Object.keys(gamificationState.topicStats).length > 0) {
-        alert('Great job! You have no weak spots. All topics are at 70% or higher mastery.');
+      if (weakQuestions.length === 0) {
+        showNoWeakSpotsMessage();
         return;
       }
 
-      if (Object.keys(gamificationState.topicStats).length === 0) {
-        alert('Complete some questions first to identify your weak spots.');
-        return;
-      }
+      // Sort: never attempted first, then by lowest success rate
+      const sorted = weakQuestions.sort((a, b) => {
+        const histA = (gamificationState.questionHistory || {})[a.id];
+        const histB = (gamificationState.questionHistory || {})[b.id];
 
+        // Never attempted goes first
+        if (!histA && histB) return -1;
+        if (histA && !histB) return 1;
+        if (!histA && !histB) return 0;
+
+        // Then by number of failed attempts (more failures = more problematic)
+        const failsA = histA.attempts - histA.correct;
+        const failsB = histB.attempts - histB.correct;
+        return failsB - failsA;
+      });
+
+      // Cap at 15 questions, shuffle to keep it fresh
+      shuffledQuestions = shuffleArray(sorted.slice(0, 15));
       currentMode = 'weak';
       currentTopic = null;
-      hideHomeScreen();
-
-      // Get questions from weak topics
-      const weakTopicNames = weakTopics.map(t => t.topic);
-      shuffledQuestions = shuffleArray(questions.filter(q => weakTopicNames.includes(q.topic)));
       currentQuestionIndex = 0;
       score = 0;
-      questionResults = {};
       hasAnswered = false;
+      questionResults = {};
 
+      hideHomeScreen();
       document.getElementById('quiz-area').style.display = 'block';
       displayQuestion();
       saveProgress();
+    }
+
+    // Show congratulations message when no weak spots
+    function showNoWeakSpotsMessage() {
+      alert('Great job! You have no weak spots.\n\nAll questions have been answered correctly at least once. Try the full quiz to find new areas to improve.');
     }
 
     // Flashcards Mode (placeholder for future implementation)
@@ -2569,6 +2615,9 @@
 
       // Update per-topic stats
       updateTopicStats(question, isCorrect);
+
+      // Update per-question history
+      updateQuestionHistory(question.id, isCorrect);
 
       // Increment total questions answered
       gamificationState.totalQuestionsAnswered++;
@@ -2667,20 +2716,45 @@
       // Clear current progress (quiz is complete)
       resetProgress();
 
+      // Update header and button based on mode
+      const header = document.getElementById('final-score-header');
+      const restartBtn = document.getElementById('restart-btn');
+
+      if (currentMode === 'weak') {
+        header.textContent = 'Weak Spots Review Complete!';
+        restartBtn.textContent = 'Review More Weak Spots';
+      } else if (currentMode === 'topic') {
+        header.textContent = `${currentTopic} Complete!`;
+        restartBtn.textContent = 'Try Again';
+      } else {
+        header.textContent = 'Quiz Complete!';
+        restartBtn.textContent = 'Try Again';
+      }
+
       document.getElementById('score-number').textContent = `${score}/${totalQuestions}`;
       document.getElementById('score-percentage').textContent = `${percentage}%`;
 
       let message = '';
-      if (percentage >= 90) {
-        message = 'Outstanding! You have excellent mastery of molecular genetics concepts.';
-      } else if (percentage >= 80) {
-        message = 'Great job! You have a strong understanding of the material.';
-      } else if (percentage >= 70) {
-        message = 'Good work! You understand most concepts but could benefit from more review.';
-      } else if (percentage >= 60) {
-        message = 'Passing grade, but there\'s room for improvement. Review the explanations and try again.';
+      if (currentMode === 'weak') {
+        if (percentage >= 90) {
+          message = 'Excellent! You\'re mastering these challenging questions.';
+        } else if (percentage >= 70) {
+          message = 'Good progress! Keep practicing to improve these weak spots.';
+        } else {
+          message = 'Keep working on these. Review the explanations and try again.';
+        }
       } else {
-        message = 'Keep studying! Review the material and take the quiz again to improve your score.';
+        if (percentage >= 90) {
+          message = 'Outstanding! You have excellent mastery of molecular genetics concepts.';
+        } else if (percentage >= 80) {
+          message = 'Great job! You have a strong understanding of the material.';
+        } else if (percentage >= 70) {
+          message = 'Good work! You understand most concepts but could benefit from more review.';
+        } else if (percentage >= 60) {
+          message = 'Passing grade, but there\'s room for improvement. Review the explanations and try again.';
+        } else {
+          message = 'Keep studying! Review the material and take the quiz again to improve your score.';
+        }
       }
 
       document.getElementById('score-message').textContent = message;
