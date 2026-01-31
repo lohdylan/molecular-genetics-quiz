@@ -253,6 +253,23 @@
       box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
     }
 
+    .reset-progress-btn {
+      background: transparent;
+      border: 1px solid #e5e7eb;
+      color: #6b7280;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .reset-progress-btn:hover {
+      border-color: #ef4444;
+      color: #ef4444;
+      background: #fef2f2;
+    }
+
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -294,7 +311,10 @@
 
     <div id="quiz-area">
       <div class="quiz-header">
-        <div class="topic" id="topic"></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <div class="topic" id="topic"></div>
+          <button onclick="resetProgressWithConfirmation()" class="reset-progress-btn">Reset Progress</button>
+        </div>
         <div class="question-counter" id="counter"></div>
         <div class="progress-bar">
           <div class="progress-fill" id="progress"></div>
@@ -322,6 +342,7 @@
       <div class="score-number" id="score-number"></div>
       <div class="score-percentage" id="score-percentage"></div>
       <div class="score-message" id="score-message"></div>
+      <div id="quiz-history"></div>
       <button class="restart-btn" onclick="resetQuiz()">Try Again</button>
     </div>
   </div>
@@ -333,6 +354,7 @@
     let score = 0;
     let shuffledQuestions = [];
     let hasAnswered = false;
+    let questionResults = {}; // Track which questions answered and correctness
 
     // Fisher-Yates shuffle algorithm
     function shuffleArray(array) {
@@ -344,14 +366,131 @@
       return shuffled;
     }
 
+    // LocalStorage functions
+    function saveProgress() {
+      try {
+        const progress = {
+          currentQuestionIndex,
+          score,
+          questionsOrder: shuffledQuestions.map(q => q.id),
+          questionResults,
+          lastAttemptDate: new Date().toISOString()
+        };
+        localStorage.setItem('quizProgress', JSON.stringify(progress));
+      } catch (e) {
+        console.error('Failed to save progress:', e);
+      }
+    }
+
+    function loadProgress() {
+      try {
+        const saved = localStorage.getItem('quizProgress');
+        if (!saved) return false;
+
+        const progress = JSON.parse(saved);
+
+        // Validate saved data
+        if (!progress.questionsOrder || !Array.isArray(progress.questionsOrder)) {
+          return false;
+        }
+
+        // Check if question set has changed
+        if (progress.questionsOrder.length !== questions.length) {
+          console.warn('Question set changed, starting fresh');
+          resetProgress();
+          return false;
+        }
+
+        // Restore shuffled order
+        shuffledQuestions = progress.questionsOrder.map(id =>
+          questions.find(q => q.id === id)
+        ).filter(q => q !== undefined);
+
+        // If we couldn't restore all questions, start fresh
+        if (shuffledQuestions.length !== questions.length) {
+          console.warn('Could not restore all questions, starting fresh');
+          resetProgress();
+          return false;
+        }
+
+        currentQuestionIndex = progress.currentQuestionIndex || 0;
+        score = progress.score || 0;
+        questionResults = progress.questionResults || {};
+
+        // If quiz was already completed, don't restore
+        if (currentQuestionIndex >= shuffledQuestions.length) {
+          return false;
+        }
+
+        return true;
+      } catch (e) {
+        console.error('Failed to load progress:', e);
+        resetProgress();
+        return false;
+      }
+    }
+
+    function resetProgress() {
+      try {
+        localStorage.removeItem('quizProgress');
+        questionResults = {};
+      } catch (e) {
+        console.error('Failed to reset progress:', e);
+      }
+    }
+
+    function saveQuizHistory(score, total) {
+      try {
+        let history = JSON.parse(localStorage.getItem('quizHistory') || '[]');
+        const percentage = Math.round((score / total) * 100);
+
+        history.unshift({
+          date: new Date().toISOString(),
+          score,
+          total,
+          percentage
+        });
+
+        // Keep only last 10 attempts
+        history = history.slice(0, 10);
+
+        localStorage.setItem('quizHistory', JSON.stringify(history));
+      } catch (e) {
+        console.error('Failed to save history:', e);
+      }
+    }
+
+    function getQuizHistory() {
+      try {
+        return JSON.parse(localStorage.getItem('quizHistory') || '[]');
+      } catch (e) {
+        console.error('Failed to load history:', e);
+        return [];
+      }
+    }
+
     // Initialize quiz
     function initQuiz() {
-      shuffledQuestions = shuffleArray(questions);
-      currentQuestionIndex = 0;
-      score = 0;
+      // Try to load saved progress
+      const hasProgress = loadProgress();
+
+      if (!hasProgress) {
+        // Start fresh quiz
+        shuffledQuestions = shuffleArray(questions);
+        currentQuestionIndex = 0;
+        score = 0;
+        questionResults = {};
+      }
+
       hasAnswered = false;
       document.getElementById('quiz-area').style.display = 'block';
       document.getElementById('final-score').classList.remove('show');
+
+      // Show resuming message if continuing
+      if (hasProgress && currentQuestionIndex > 0) {
+        showResumingMessage();
+      }
+
       displayQuestion();
     }
 
@@ -399,6 +538,12 @@
         score++;
       }
 
+      // Track this question result
+      questionResults[question.id] = {
+        answered: true,
+        correct: isCorrect
+      };
+
       // Update button states
       const buttons = document.querySelectorAll('.option-btn');
       buttons.forEach(button => {
@@ -432,6 +577,9 @@
 
       // Show next button
       document.getElementById('next-btn').classList.add('show');
+
+      // Save progress after answering
+      saveProgress();
     }
 
     // Move to next question or show final score
@@ -439,6 +587,7 @@
       currentQuestionIndex++;
 
       if (currentQuestionIndex < shuffledQuestions.length) {
+        saveProgress();
         displayQuestion();
       } else {
         showFinalScore();
@@ -452,6 +601,12 @@
 
       const totalQuestions = shuffledQuestions.length;
       const percentage = Math.round((score / totalQuestions) * 100);
+
+      // Save to history
+      saveQuizHistory(score, totalQuestions);
+
+      // Clear current progress (quiz is complete)
+      resetProgress();
 
       document.getElementById('score-number').textContent = `${score}/${totalQuestions}`;
       document.getElementById('score-percentage').textContent = `${percentage}%`;
@@ -470,11 +625,71 @@
       }
 
       document.getElementById('score-message').textContent = message;
+
+      // Display history
+      displayQuizHistory();
+    }
+
+    // Display quiz history on final score screen
+    function displayQuizHistory() {
+      const history = getQuizHistory();
+      const historyContainer = document.getElementById('quiz-history');
+
+      if (!historyContainer) return;
+
+      if (history.length === 0) {
+        historyContainer.innerHTML = '';
+        return;
+      }
+
+      const recentHistory = history.slice(0, 5);
+      let historyHTML = '<h3 style="color: #667eea; font-size: 20px; margin: 30px 0 15px 0;">Recent History</h3>';
+      historyHTML += '<div style="background: #f9fafb; border-radius: 8px; padding: 15px; margin-bottom: 20px;">';
+
+      recentHistory.forEach((attempt, index) => {
+        const date = new Date(attempt.date);
+        const dateStr = date.toLocaleDateString();
+        const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        historyHTML += `
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; ${index < recentHistory.length - 1 ? 'border-bottom: 1px solid #e5e7eb;' : ''}">
+            <div style="color: #6b7280; font-size: 14px;">
+              ${dateStr} ${timeStr}
+            </div>
+            <div style="font-weight: 600; color: ${attempt.percentage >= 70 ? '#22c55e' : '#ef4444'};">
+              ${attempt.score}/${attempt.total} (${attempt.percentage}%)
+            </div>
+          </div>
+        `;
+      });
+
+      historyHTML += '</div>';
+      historyContainer.innerHTML = historyHTML;
+    }
+
+    // Show resuming message
+    function showResumingMessage() {
+      const counter = document.getElementById('counter');
+      const originalText = counter.textContent;
+      counter.innerHTML = `<span style="color: #667eea; font-weight: 700;">Resuming from Question ${currentQuestionIndex + 1}</span>`;
+
+      setTimeout(() => {
+        counter.textContent = originalText;
+      }, 3000);
     }
 
     // Reset and restart quiz
     function resetQuiz() {
+      resetProgress();
       initQuiz();
+    }
+
+    // Reset progress with confirmation
+    function resetProgressWithConfirmation() {
+      if (confirm('Are you sure you want to reset your progress? This will clear your current quiz session.')) {
+        resetProgress();
+        location.reload();
+      }
     }
 
     // Start quiz when page loads
