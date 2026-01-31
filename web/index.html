@@ -615,7 +615,8 @@
       dailyStreak: 0,         // days studied in a row
       lastStudyDate: null,    // ISO date string (YYYY-MM-DD)
       questionsToday: 0,      // questions answered today
-      todayDate: null         // current date for reset detection
+      todayDate: null,        // current date for reset detection
+      topicStats: {}          // per-topic tracking: { "Topic Name": { correct: N, total: M } }
     };
 
     // Gamification helper functions
@@ -633,6 +634,40 @@
 
     function getXPForNextLevel(xp) {
       return 100 - (xp % 100);
+    }
+
+    // Topic tracking functions
+    function updateTopicStats(question, isCorrect) {
+      const topic = question.topic;
+      if (!gamificationState.topicStats[topic]) {
+        gamificationState.topicStats[topic] = { correct: 0, total: 0 };
+      }
+      gamificationState.topicStats[topic].total++;
+      if (isCorrect) {
+        gamificationState.topicStats[topic].correct++;
+      }
+    }
+
+    function getTopicMastery(topic) {
+      const stats = gamificationState.topicStats[topic];
+      if (!stats || stats.total === 0) return 0;
+      return Math.round((stats.correct / stats.total) * 100);
+    }
+
+    function getAllTopicStats() {
+      const result = [];
+      for (const topic in gamificationState.topicStats) {
+        const stats = gamificationState.topicStats[topic];
+        result.push({
+          topic: topic,
+          correct: stats.correct,
+          total: stats.total,
+          mastery: getTopicMastery(topic)
+        });
+      }
+      // Sort by mastery (ascending - weakest first)
+      result.sort((a, b) => a.mastery - b.mastery);
+      return result;
     }
 
     // Gamification localStorage functions
@@ -689,7 +724,8 @@
           dailyStreak: loaded.dailyStreak || 0,
           lastStudyDate: loaded.lastStudyDate || null,
           questionsToday: loaded.questionsToday || 0,
-          todayDate: loaded.todayDate || currentDate
+          todayDate: loaded.todayDate || currentDate,
+          topicStats: loaded.topicStats || {}
         };
 
         saveGamificationState(); // Save any updates made during load
@@ -703,7 +739,8 @@
           dailyStreak: 0,
           lastStudyDate: null,
           questionsToday: 0,
-          todayDate: getCurrentDateString()
+          todayDate: getCurrentDateString(),
+          topicStats: {}
         };
         return false;
       }
@@ -954,6 +991,9 @@
 
       // Award XP and get amount earned
       const xpEarned = awardXP(isCorrect);
+
+      // Update per-topic stats
+      updateTopicStats(question, isCorrect);
 
       // Track this question result
       questionResults[question.id] = {
