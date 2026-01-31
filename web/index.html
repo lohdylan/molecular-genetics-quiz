@@ -907,6 +907,205 @@
         padding: 2px 6px;
       }
     }
+
+    /* Achievements Gallery Styles */
+    .achievements-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .achievements-btn:hover {
+      background: #fef3c7;
+      transform: scale(1.1);
+    }
+
+    .achievements-btn:focus {
+      outline: 2px solid #f59e0b;
+      outline-offset: 2px;
+    }
+
+    .achievements-screen {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .achievements-screen.show {
+      display: block;
+    }
+
+    .achievements-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .achievements-title {
+      color: #f59e0b;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .achievements-close-btn {
+      background: #f3f4f6;
+      border: none;
+      color: #6b7280;
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .achievements-close-btn:hover {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .achievements-close-btn:focus {
+      outline: 2px solid #f59e0b;
+      outline-offset: 2px;
+    }
+
+    .achievements-progress {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 1px solid #fcd34d;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .achievements-progress-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: #92400e;
+    }
+
+    .achievements-progress-bar {
+      height: 10px;
+      background: #fde68a;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .achievements-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+      transition: width 0.5s ease;
+    }
+
+    .achievements-section {
+      margin-bottom: 24px;
+    }
+
+    .achievements-section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 15px;
+    }
+
+    .achievement-card {
+      background: white;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .achievement-card.unlocked {
+      border-color: #f59e0b;
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+    }
+
+    .achievement-card.locked {
+      opacity: 0.6;
+      filter: grayscale(0.5);
+    }
+
+    .achievement-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .achievement-icon {
+      font-size: 40px;
+      margin-bottom: 8px;
+    }
+
+    .achievement-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: #374151;
+      margin-bottom: 4px;
+    }
+
+    .achievement-description {
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+
+    .achievement-locked-hint {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* Achievements screen mobile styles */
+    @media (max-width: 640px) {
+      .achievements-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .achievement-card {
+        padding: 12px;
+      }
+
+      .achievement-icon {
+        font-size: 32px;
+      }
+
+      .achievement-name {
+        font-size: 12px;
+      }
+
+      .achievement-description {
+        font-size: 10px;
+      }
+
+      .achievements-title {
+        font-size: 20px;
+      }
+
+      .achievements-btn {
+        font-size: 18px;
+        padding: 2px 6px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -932,6 +1131,7 @@
           <span class="streak-count" id="streak-count">0</span>
           <span class="streak-label">day streak</span>
         </div>
+        <button class="achievements-btn" onclick="showAchievements()" title="View Achievements">&#127942;</button>
         <button class="stats-btn" onclick="showStats()" title="View Progress Stats">&#128202;</button>
       </div>
     </div>
@@ -996,6 +1196,32 @@
         <div class="stats-section-title">&#128197; Quiz History</div>
         <div class="history-list" id="stats-history-list">
           <!-- Populated by renderStats() -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Achievements Gallery Screen -->
+    <div id="achievements-screen" class="achievements-screen">
+      <div class="achievements-header">
+        <h2 class="achievements-title">Achievements</h2>
+        <button class="achievements-close-btn" onclick="hideAchievements()" title="Close">&#10005;</button>
+      </div>
+
+      <div class="achievements-progress" id="achievements-progress">
+        <!-- Populated by renderAchievements() -->
+      </div>
+
+      <div class="achievements-section">
+        <div class="achievements-section-title">&#127942; Milestones</div>
+        <div class="achievements-grid" id="milestones-grid">
+          <!-- Populated by renderAchievements() -->
+        </div>
+      </div>
+
+      <div class="achievements-section">
+        <div class="achievements-section-title">&#129516; Topic Mastery</div>
+        <div class="achievements-grid" id="mastery-grid">
+          <!-- Populated by renderAchievements() -->
         </div>
       </div>
     </div>
@@ -1485,6 +1711,7 @@
     function showStats() {
       document.getElementById('quiz-area').style.display = 'none';
       document.getElementById('final-score').classList.remove('show');
+      document.getElementById('achievements-screen').classList.remove('show');
       document.getElementById('stats-screen').classList.add('show');
       renderStats();
     }
@@ -1492,6 +1719,107 @@
     function hideStats() {
       document.getElementById('stats-screen').classList.remove('show');
       document.getElementById('quiz-area').style.display = 'block';
+    }
+
+    // Achievements Gallery Functions
+    function showAchievements() {
+      document.getElementById('quiz-area').style.display = 'none';
+      document.getElementById('final-score').classList.remove('show');
+      document.getElementById('stats-screen').classList.remove('show');
+      document.getElementById('achievements-screen').classList.add('show');
+      renderAchievements();
+    }
+
+    function hideAchievements() {
+      document.getElementById('achievements-screen').classList.remove('show');
+      document.getElementById('quiz-area').style.display = 'block';
+    }
+
+    function renderAchievements() {
+      renderAchievementsProgress();
+      renderMilestonesGrid();
+      renderMasteryGrid();
+    }
+
+    function renderAchievementsProgress() {
+      const total = allAchievements.length;
+      const unlocked = gamificationState.unlockedAchievements.length;
+      const percentage = total > 0 ? Math.round((unlocked / total) * 100) : 0;
+
+      const progressContainer = document.getElementById('achievements-progress');
+      progressContainer.innerHTML = `
+        <div class="achievements-progress-text">${unlocked} of ${total} achievements unlocked</div>
+        <div class="achievements-progress-bar">
+          <div class="achievements-progress-fill" style="width: ${percentage}%"></div>
+        </div>
+      `;
+    }
+
+    function renderMilestonesGrid() {
+      const milestonesGrid = document.getElementById('milestones-grid');
+      const milestoneAchievements = allAchievements.filter(a => a.type === 'milestone');
+
+      milestonesGrid.innerHTML = milestoneAchievements.map(achievement =>
+        renderAchievementCard(achievement)
+      ).join('');
+    }
+
+    function renderMasteryGrid() {
+      const masteryGrid = document.getElementById('mastery-grid');
+      const masteryAchievements = allAchievements.filter(a => a.type === 'mastery');
+
+      masteryGrid.innerHTML = masteryAchievements.map(achievement =>
+        renderAchievementCard(achievement)
+      ).join('');
+    }
+
+    function renderAchievementCard(achievement) {
+      const isUnlocked = gamificationState.unlockedAchievements.includes(achievement.id);
+      const cardClass = isUnlocked ? 'unlocked' : 'locked';
+
+      let hintText = '';
+      if (!isUnlocked) {
+        hintText = getAchievementHint(achievement);
+      }
+
+      return `
+        <div class="achievement-card ${cardClass}">
+          <div class="achievement-icon">${achievement.icon}</div>
+          <div class="achievement-name">${achievement.name}</div>
+          <div class="achievement-description">${achievement.description}</div>
+          ${!isUnlocked ? `<div class="achievement-locked-hint">${hintText}</div>` : ''}
+        </div>
+      `;
+    }
+
+    function getAchievementHint(achievement) {
+      const req = achievement.requirement;
+
+      switch (req.metric) {
+        case 'totalCorrect':
+          const currentCorrect = getTotalCorrect();
+          return `${currentCorrect}/${req.value} correct`;
+        case 'quizzesCompleted':
+          return `${gamificationState.quizzesCompleted}/${req.value} quizzes`;
+        case 'level':
+          const currentLevel = calculateLevel(gamificationState.totalXP);
+          return `Level ${currentLevel}/${req.value}`;
+        case 'currentStreak':
+          return `Best in session: ${gamificationState.currentStreak}/${req.value}`;
+        case 'dailyStreak':
+          return `${gamificationState.dailyStreak}/${req.value} days`;
+        case 'perfectQuiz':
+          return 'Get 100% on a quiz';
+        case 'topicMastery':
+          const topicStats = gamificationState.topicStats[achievement.topic];
+          if (!topicStats) {
+            return 'Answer questions from this topic';
+          }
+          const mastery = getTopicMastery(achievement.topic);
+          return `${mastery}% mastery`;
+        default:
+          return 'Keep studying!';
+      }
     }
 
     function renderStats() {
@@ -1607,6 +1935,7 @@
       document.getElementById('quiz-area').style.display = 'block';
       document.getElementById('final-score').classList.remove('show');
       document.getElementById('stats-screen').classList.remove('show');
+      document.getElementById('achievements-screen').classList.remove('show');
 
       // Show resuming message if continuing
       if (hasProgress && currentQuestionIndex > 0) {
