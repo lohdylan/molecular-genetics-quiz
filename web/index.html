@@ -419,6 +419,84 @@
       }
     }
 
+    /* Toast notification styles */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 350px;
+    }
+
+    .achievement-toast {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 2px solid #f59e0b;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3), 0 4px 10px rgba(0, 0, 0, 0.1);
+      animation: toastEnter 0.5s ease forwards;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .achievement-toast.toast-exit {
+      animation: toastExit 0.4s ease forwards;
+    }
+
+    .toast-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+
+    .toast-content {
+      flex: 1;
+    }
+
+    .toast-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: #92400e;
+      margin-bottom: 2px;
+    }
+
+    .toast-name {
+      font-weight: 600;
+      font-size: 16px;
+      color: #78350f;
+      margin-bottom: 4px;
+    }
+
+    .toast-description {
+      font-size: 12px;
+      color: #a16207;
+    }
+
+    @keyframes toastEnter {
+      0% {
+        opacity: 0;
+        transform: translateX(100px) scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    @keyframes toastExit {
+      0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(100px) scale(0.8);
+      }
+    }
+
     /* Mobile-first responsive design */
     @media (max-width: 640px) {
       body {
@@ -428,6 +506,29 @@
       .container {
         padding: 20px;
         border-radius: 8px;
+      }
+
+      .toast-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+      }
+
+      .achievement-toast {
+        padding: 12px;
+      }
+
+      .toast-icon {
+        font-size: 28px;
+      }
+
+      .toast-name {
+        font-size: 14px;
+      }
+
+      .toast-description {
+        font-size: 11px;
       }
 
       h1 {
@@ -540,6 +641,9 @@
   </style>
 </head>
 <body>
+  <!-- Toast notification container -->
+  <div class="toast-container" id="toast-container"></div>
+
   <div class="container">
     <h1>Molecular Genetics Quiz</h1>
 
@@ -854,6 +958,118 @@
       }
     }
 
+    // Achievement toast notification
+    function showAchievementToast(achievement) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'achievement-toast';
+      toast.innerHTML = `
+        <span class="toast-icon">${achievement.icon}</span>
+        <div class="toast-content">
+          <div class="toast-title">Achievement Unlocked!</div>
+          <div class="toast-name">${achievement.name}</div>
+          <div class="toast-description">${achievement.description}</div>
+        </div>
+      `;
+      container.appendChild(toast);
+
+      // Auto-dismiss after 4 seconds
+      setTimeout(() => {
+        toast.classList.add('toast-exit');
+        setTimeout(() => {
+          if (toast.parentNode) {
+            toast.parentNode.removeChild(toast);
+          }
+        }, 400);
+      }, 4000);
+    }
+
+    // Calculate total correct answers from topic stats
+    function getTotalCorrect() {
+      let total = 0;
+      for (const topic in gamificationState.topicStats) {
+        total += gamificationState.topicStats[topic].correct;
+      }
+      return total;
+    }
+
+    // Check and unlock achievements
+    function checkAchievements(context = {}) {
+      const unlockedNow = [];
+
+      allAchievements.forEach(achievement => {
+        // Skip if already unlocked
+        if (gamificationState.unlockedAchievements.includes(achievement.id)) {
+          return;
+        }
+
+        let isUnlocked = false;
+        const req = achievement.requirement;
+
+        switch (req.metric) {
+          case 'totalCorrect':
+            isUnlocked = getTotalCorrect() >= req.value;
+            break;
+          case 'quizzesCompleted':
+            isUnlocked = gamificationState.quizzesCompleted >= req.value;
+            break;
+          case 'level':
+            isUnlocked = calculateLevel(gamificationState.totalXP) >= req.value;
+            break;
+          case 'currentStreak':
+            isUnlocked = gamificationState.currentStreak >= req.value;
+            break;
+          case 'dailyStreak':
+            isUnlocked = gamificationState.dailyStreak >= req.value;
+            break;
+          case 'perfectQuiz':
+            isUnlocked = context.perfectQuiz === true;
+            break;
+          case 'topicMastery':
+            isUnlocked = checkTopicMastery(achievement.topic);
+            break;
+        }
+
+        if (isUnlocked) {
+          gamificationState.unlockedAchievements.push(achievement.id);
+          unlockedNow.push(achievement);
+        }
+      });
+
+      // Show toast for newly unlocked achievements
+      unlockedNow.forEach((achievement, index) => {
+        // Stagger toasts if multiple unlocked
+        setTimeout(() => {
+          showAchievementToast(achievement);
+        }, index * 500);
+      });
+
+      // Save state if any achievements were unlocked
+      if (unlockedNow.length > 0) {
+        saveGamificationState();
+      }
+
+      return unlockedNow;
+    }
+
+    // Check if a topic has 100% mastery (all questions answered correctly)
+    function checkTopicMastery(topic) {
+      const stats = gamificationState.topicStats[topic];
+      if (!stats) return false;
+
+      // Get total questions for this topic
+      const topicQuestions = questions.filter(q => q.topic === topic);
+      const totalQuestionsForTopic = topicQuestions.length;
+
+      // Must have answered all questions for this topic AND gotten all correct
+      return stats.total >= totalQuestionsForTopic && stats.correct === stats.total && stats.total > 0;
+    }
+
+    // Check for perfect score achievement
+    function checkPerfectScore(quizScore, totalQuestions) {
+      return quizScore === totalQuestions;
+    }
+
     // Fisher-Yates shuffle algorithm
     function shuffleArray(array) {
       const shuffled = [...array];
@@ -1049,6 +1265,12 @@
       // Update per-topic stats
       updateTopicStats(question, isCorrect);
 
+      // Increment total questions answered
+      gamificationState.totalQuestionsAnswered++;
+
+      // Check for achievements (milestone and mastery)
+      checkAchievements();
+
       // Track this question result
       questionResults[question.id] = {
         answered: true,
@@ -1125,6 +1347,14 @@
 
       const totalQuestions = shuffledQuestions.length;
       const percentage = Math.round((score / totalQuestions) * 100);
+
+      // Increment quizzes completed
+      gamificationState.quizzesCompleted++;
+      saveGamificationState();
+
+      // Check for quiz-related achievements (quiz completion and perfect score)
+      const isPerfect = checkPerfectScore(score, totalQuestions);
+      checkAchievements({ perfectQuiz: isPerfect });
 
       // Save to history
       saveQuizHistory(score, totalQuestions);
