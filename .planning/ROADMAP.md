@@ -43,9 +43,9 @@ Plans:
 
 ---
 
-## Phase 4: Gamification
+## Phase 4: Gamification ✓
 
-**Status:** In progress (1/3 plans complete)
+**Status:** Complete
 
 **Goal:** User earns XP, levels up, maintains streaks, and unlocks achievements
 
@@ -55,16 +55,16 @@ Plans:
 
 Plans:
 - [x] 04-01-PLAN.md — XP, levels, and daily streak system
-- [ ] 04-02-PLAN.md — Achievements with badges, toasts, and gallery
-- [ ] 04-03-PLAN.md — Progress tracking and stats dashboard
+- [x] 04-02-PLAN.md — Achievements with badges, toasts, and gallery
+- [x] 04-03-PLAN.md — Progress tracking and stats dashboard
 
-**Success Criteria:**
-1. XP awarded for correct answers (+10 base, bonus for streaks)
-2. Level displayed based on total XP
-3. Daily streak counter increments
-4. Achievements unlock and display notifications
-5. Topic mastery percentages shown
-6. Weak topics highlighted (< 70%)
+**Delivered:**
+1. XP awarded for correct answers (+10 base, +5 per streak bonus)
+2. Level displayed based on total XP (100 XP per level)
+3. Daily streak counter with 10-question minimum
+4. 15 milestone + dynamic topic mastery achievements
+5. Topic mastery progress bars on stats dashboard
+6. Weak topics highlighted in orange (< 70%)
 
 ---
 
